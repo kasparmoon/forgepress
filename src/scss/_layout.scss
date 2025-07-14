@@ -1,0 +1,21 @@
+@use 'variables' as *;
+
+// General body styles
+body {
+    background-color: $color-background;
+    color: $color-text;
+}
+
+// Main site containers
+.site {
+    max-width: $content-width;
+    margin: 0 auto; // Center the site content
+    padding: $spacing-unit * 2;
+}
+
+// Styles for individual articles in the blog list
+.post {
+    padding-bottom: $spacing-unit;
+    margin-bottom: $spacing-unit;
+    border-bottom: 1px solid $color-border;
+}

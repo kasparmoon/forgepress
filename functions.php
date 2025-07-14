@@ -17,86 +17,64 @@ if ( ! defined( 'ABSPATH' ) ) {
 // =============================================================================
 // 1. THEME SETUP
 // =============================================================================
-
-/**
- * Sets up theme defaults and registers support for various WordPress features.
- *
- *  @since 1.0.0
- *  @return void
- */
-function forgepress_setup()
-{
-	// Add support for block-based widgets.
-	add_theme_support('widgets-block-editor');
-
-	// Register navigation menus.
+function forgepress_setup() {
+	add_theme_support( 'widgets-block-editor' );
 	register_nav_menus(
 		array(
-			'primary' => esc_html__('Primary Menu', 'forgepress'),
-			'footer'  => esc_html__('Footer Menu', 'forgepress'),
+			'primary' => esc_html__( 'Primary Menu', 'forgepress' ),
+			'footer'  => esc_html__( 'Footer Menu', 'forgepress' ),
 		)
 	);
 }
-add_action('after_setup_theme', 'forgepress_setup');
-
+add_action( 'after_setup_theme', 'forgepress_setup' );
 
 // =============================================================================
 // 2. VITE ASSET INTEGRATION
 // =============================================================================
+define( 'FORGEPRESS_DEV_SERVER', 'http://localhost:5173' );
+define( 'FORGEPRESS_PROD_URL', get_template_directory_uri() . '/dist' );
+define( 'FORGEPRESS_PROD_PATH', get_template_directory() . '/dist' );
 
-// Define constants for assets.
-define('FORGEPRESS_DEV_SERVER', 'http://localhost:5173'); // Default Vite dev server URL.
-define('FORGEPRESS_PROD_URL', get_template_directory_uri() . '/dist');
-define('FORGEPRESS_PROD_PATH', get_template_directory() . '/dist');
-
-/**
- * Checks if the Vite development server is running.
- *
- * @since 1.0.0
- * @return bool True if the dev server is running, false otherwise.
- */
-function forgepress_is_vite_dev()
-{
-	// Simple check: is the dev server URL reachable?
-	$url      = FORGEPRESS_DEV_SERVER . '/@vite/client';
-	$response = wp_remote_get($url, array('timeout' => 1, 'sslverify' => false));
-	return ! is_wp_error($response);
+function forgepress_is_vite_dev() {
+	// To force dev mode for debugging, add `define( 'FORGEPRESS_VITE_DEV', true );` to your wp-config.php file.
+	return defined( 'FORGEPRESS_VITE_DEV' ) && FORGEPRESS_VITE_DEV;
 }
 
-/**
- * Enqueue scripts and styles from Vite.
- *
- * @since 1.0.0
- * @return void
- */
-function forgepress_enqueue_scripts()
-{
-	if (forgepress_is_vite_dev()) {
-		// Development: Load scripts from Vite dev server.
-		wp_enqueue_script('main-js', FORGEPRESS_DEV_SERVER . '/src/main.jsx', array(), null, true);
+function forgepress_enqueue_scripts() {
+	if ( forgepress_is_vite_dev() ) {
+		// Development mode (npm run dev)
+		wp_enqueue_script( 'vite-client', FORGEPRESS_DEV_SERVER . '/@vite/client', array(), null, true );
+		wp_enqueue_script( 'forgepress-main-js', FORGEPRESS_DEV_SERVER . '/src/main.jsx', array( 'vite-client' ), '1.0.0', true );
 	} else {
-		// Production: Load scripts from the manifest.
-		$manifest_path = FORGEPRESS_PROD_PATH . '/manifest.json';
-		if (file_exists($manifest_path)) {
-			$manifest = json_decode(file_get_contents($manifest_path), true);
+		// Production mode (npm run build)
+		// THIS IS THE FIX: The path now correctly points to the .vite subfolder.
+		$manifest_path = FORGEPRESS_PROD_PATH . '/.vite/manifest.json';
 
-			if (isset($manifest['src/main.jsx']['file'])) {
-				wp_enqueue_script('main-js', FORGEPRESS_PROD_URL . '/' . $manifest['src/main.jsx']['file'], array(), null, true);
+		if ( file_exists( $manifest_path ) ) {
+			$manifest = json_decode( file_get_contents( $manifest_path ), true );
+
+			if ( ! empty( $manifest['src/main.jsx']['file'] ) ) {
+				wp_enqueue_script( 'forgepress-main-js', FORGEPRESS_PROD_URL . '/' . $manifest['src/main.jsx']['file'], array(), false, true );
 			}
-			if (isset($manifest['src/main.jsx']['css'])) {
-				foreach ($manifest['src/main.jsx']['css'] as $css_file) {
-					wp_enqueue_style('main-css', FORGEPRESS_PROD_URL . '/' . $css_file);
+			if ( ! empty( $manifest['src/main.jsx']['css'] ) ) {
+				foreach ( $manifest['src/main.jsx']['css'] as $css_file ) {
+					wp_enqueue_style( 'forgepress-main-css', FORGEPRESS_PROD_URL . '/' . $css_file );
 				}
 			}
 		}
 	}
 }
-add_action('wp_enqueue_scripts', 'forgepress_enqueue_scripts');
+add_action( 'wp_enqueue_scripts', 'forgepress_enqueue_scripts' );
 
+function forgepress_add_module_to_script( $tag, $handle, $src ) {
+	if ( 'vite-client' === $handle || 'forgepress-main-js' === $handle ) {
+		return '<script type="module" src="' . esc_url( $src ) . '" id="' . esc_attr( $handle ) . '-js"></script>';
+	}
+	return $tag;
+}
+add_filter( 'script_loader_tag', 'forgepress_add_module_to_script', 10, 3 );
 
 // =============================================================================
 // 3. INCLUDE ADDITIONAL FILES
 // =============================================================================
-
-// Include the Customizer settings.
 require_once get_template_directory() . '/inc/customizer.php';
