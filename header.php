@@ -1,9 +1,6 @@
 <?php
 /**
  * The header for our theme
- * Theme Name: ForgePress
- * Author: Abu Saeed M Sayem AKA Kaspar Moon
- * Author URI: https://passivewriting.com/about
  * This is the template that displays all of the <head> section and everything up until the main content.
  *
  * @package ForgePress
