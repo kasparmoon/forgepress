@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './style.css'; // Vite will see this and handle the CSS
+import './style.scss'; // Changed from .css to .scss
 
 // A simple React component
 function App() {
