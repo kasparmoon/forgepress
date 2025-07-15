@@ -35,9 +35,16 @@ define( 'FORGEPRESS_DEV_SERVER', 'http://localhost:5173' );
 define( 'FORGEPRESS_PROD_URL', get_template_directory_uri() . '/dist' );
 define( 'FORGEPRESS_PROD_PATH', get_template_directory() . '/dist' );
 
+/**
+ * Checks if the Vite development server is running.
+ *
+ * @since 1.0.0
+ * @return bool True if dev mode is active, false otherwise.
+ */
 function forgepress_is_vite_dev() {
 	// To force dev mode for debugging, add `define( 'FORGEPRESS_VITE_DEV', true );` to your wp-config.php file.
-	return defined( 'FORGEPRESS_VITE_DEV' ) && FORGEPRESS_VITE_DEV;
+	// This check is written to be friendly to static analysis tools like Intelephense.
+	return defined( 'FORGEPRESS_VITE_DEV' ) && true === constant( 'FORGEPRESS_VITE_DEV' );
 }
 
 function forgepress_enqueue_scripts() {
@@ -47,7 +54,6 @@ function forgepress_enqueue_scripts() {
 		wp_enqueue_script( 'forgepress-main-js', FORGEPRESS_DEV_SERVER . '/src/main.jsx', array( 'vite-client' ), '1.0.0', true );
 	} else {
 		// Production mode (npm run build)
-		// THIS IS THE FIX: The path now correctly points to the .vite subfolder.
 		$manifest_path = FORGEPRESS_PROD_PATH . '/.vite/manifest.json';
 
 		if ( file_exists( $manifest_path ) ) {
