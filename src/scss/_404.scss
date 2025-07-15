@@ -1,0 +1,22 @@
+.error-404 {
+	text-align: center;
+	padding: $spacing-unit * 2 0;
+
+	.page-header {
+		margin-bottom: $spacing-unit;
+	}
+
+	// Basic styling for the search form.
+	.search-form {
+		margin-top: $spacing-unit;
+	}
+
+	.search-field {
+		padding: 0.5rem;
+		min-width: 300px;
+	}
+
+	.search-submit {
+		padding: 0.5rem 1rem;
+	}
+}
