@@ -1,0 +1,23 @@
+.entry-meta {
+    font-size: 0.85rem;
+    color: #666;
+    margin-bottom: $spacing-unit;
+
+    .byline,
+    .posted-on {
+        margin-right: $spacing-unit;
+    }
+
+    a {
+        color: #666;
+        font-weight: 600;
+
+        &:hover {
+            color: var(--primary-accent-color);
+        }
+    }
+}
+
+.entry-title {
+    margin-bottom: 0.5rem;
+}
