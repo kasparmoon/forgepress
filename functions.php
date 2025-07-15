@@ -17,22 +17,26 @@ if ( ! defined( 'ABSPATH' ) ) {
 // =============================================================================
 // 1. THEME SETUP
 // =============================================================================
-	function forgepress_setup() {
-		// Add support for block-based widgets.
-		add_theme_support( 'widgets-block-editor' );
+function forgepress_setup() {
+	// Add support for block-based widgets.
+	add_theme_support( 'widgets-block-editor' );
 
-		// Enable support for Post Thumbnails on posts and pages.
-		add_theme_support( 'post-thumbnails' );
+	// Enable support for Post Thumbnails on posts and pages.
+	add_theme_support( 'post-thumbnails' );
 
-		// Register navigation menus.
-		register_nav_menus(
-			array(
-				'primary' => esc_html__( 'Primary Menu', 'forgepress' ),
-				'footer'  => esc_html__( 'Footer Menu', 'forgepress' ),
-			)
-		);
-	}
-	add_action( 'after_setup_theme', 'forgepress_setup' );
+	// THIS IS THE NEW LINE: Add support for wide and full-width block alignments.
+	add_theme_support( 'align-wide' );
+
+	// Register navigation menus.
+	register_nav_menus(
+		array(
+			'primary' => esc_html__( 'Primary Menu', 'forgepress' ),
+			'footer'  => esc_html__( 'Footer Menu', 'forgepress' ),
+		)
+	);
+}
+add_action( 'after_setup_theme', 'forgepress_setup' );
+
 
 // =============================================================================
 // 2. VITE ASSET INTEGRATION
@@ -41,15 +45,8 @@ define( 'FORGEPRESS_DEV_SERVER', 'http://localhost:5173' );
 define( 'FORGEPRESS_PROD_URL', get_template_directory_uri() . '/dist' );
 define( 'FORGEPRESS_PROD_PATH', get_template_directory() . '/dist' );
 
-/**
- * Checks if the Vite development server is running.
- *
- * @since 1.0.0
- * @return bool True if dev mode is active, false otherwise.
- */
 function forgepress_is_vite_dev() {
 	// To force dev mode for debugging, add `define( 'FORGEPRESS_VITE_DEV', true );` to your wp-config.php file.
-	// This check is written to be friendly to static analysis tools like Intelephense.
 	return defined( 'FORGEPRESS_VITE_DEV' ) && true === constant( 'FORGEPRESS_VITE_DEV' );
 }
 
@@ -85,6 +82,7 @@ function forgepress_add_module_to_script( $tag, $handle, $src ) {
 	return $tag;
 }
 add_filter( 'script_loader_tag', 'forgepress_add_module_to_script', 10, 3 );
+
 
 // =============================================================================
 // 3. INCLUDE ADDITIONAL FILES

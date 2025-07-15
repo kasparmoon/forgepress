@@ -2,20 +2,52 @@
 
 // General body styles
 body {
-    background-color: $color-background;
-    color: $color-text;
+	background-color: $color-background;
+	color: $color-text;
 }
 
 // Main site containers
 .site {
-    max-width: $content-width;
-    margin: 0 auto; // Center the site content
-    padding: $spacing-unit * 2;
+	padding: $spacing-unit * 2;
+}
+
+/**
+ * Main content column structure
+ * This uses CSS Grid to create three "lanes":
+ * 1. A small margin on the left
+ * 2. The main content column (max-width of $content-width)
+ * 3. A small margin on the right
+ */
+.site-main > * {
+	display: grid;
+	grid-template-columns: 1fr min( $content-width, 100% ) 1fr;
+	grid-column-gap: $spacing-unit;
+
+	// All direct children of a grid item go into the middle column by default.
+	> * {
+		grid-column: 2;
+	}
+}
+
+// Wide alignment: breaks out into the margins.
+.alignwide {
+	grid-column: 1 / -1; // Span all 3 columns
+	max-width: $content-width + 200px; // A little wider than the main content
+	margin-left: auto;
+	margin-right: auto;
+}
+
+// Full alignment: breaks out completely edge-to-edge.
+.alignfull {
+	grid-column: 1 / -1; // Span all 3 columns
+	max-width: 100vw; // 100% of the viewport width
+	margin-left: calc( 50% - 50vw );
+	width: 100vw;
 }
 
 // Styles for individual articles in the blog list
 .post {
-    padding-bottom: $spacing-unit;
-    margin-bottom: $spacing-unit;
-    border-bottom: 1px solid $color-border;
+	padding-bottom: $spacing-unit;
+	margin-bottom: $spacing-unit;
+	border-bottom: 1px solid $color-border;
 }
