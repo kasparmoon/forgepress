@@ -1,3 +1,5 @@
+@use 'variables' as *;
+
 .comments-area {
 	margin-top: $spacing-unit * 2;
 	border-top: 1px solid $color-border;

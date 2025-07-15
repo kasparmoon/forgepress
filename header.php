@@ -2,7 +2,6 @@
 // phpcs:ignoreFile
 /**
  * The header for our theme
- * This is the template that displays all of the <head> section and everything up until the main content.
  *
  * @package ForgePress
  */
@@ -24,4 +23,13 @@
 	<header id="masthead" class="site-header">
 		<div class="site-branding">
 			<h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
-		</div></header><div id="content" class="site-content">
+		</div><nav id="site-navigation" class="main-navigation">
+			<?php
+			wp_nav_menu(
+				array(
+					'theme_location' => 'primary',
+					'menu_id'        => 'primary-menu',
+				)
+			);
+			?>
+		</nav></header><div id="content" class="site-content">

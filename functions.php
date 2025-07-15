@@ -17,16 +17,22 @@ if ( ! defined( 'ABSPATH' ) ) {
 // =============================================================================
 // 1. THEME SETUP
 // =============================================================================
-function forgepress_setup() {
-	add_theme_support( 'widgets-block-editor' );
-	register_nav_menus(
-		array(
-			'primary' => esc_html__( 'Primary Menu', 'forgepress' ),
-			'footer'  => esc_html__( 'Footer Menu', 'forgepress' ),
-		)
-	);
-}
-add_action( 'after_setup_theme', 'forgepress_setup' );
+	function forgepress_setup() {
+		// Add support for block-based widgets.
+		add_theme_support( 'widgets-block-editor' );
+
+		// Enable support for Post Thumbnails on posts and pages.
+		add_theme_support( 'post-thumbnails' );
+
+		// Register navigation menus.
+		register_nav_menus(
+			array(
+				'primary' => esc_html__( 'Primary Menu', 'forgepress' ),
+				'footer'  => esc_html__( 'Footer Menu', 'forgepress' ),
+			)
+		);
+	}
+	add_action( 'after_setup_theme', 'forgepress_setup' );
 
 // =============================================================================
 // 2. VITE ASSET INTEGRATION

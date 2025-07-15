@@ -1,0 +1,36 @@
+@use 'variables' as *;
+
+// Main navigation in the header
+.main-navigation {
+	ul {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		display: flex;
+		gap: $spacing-unit;
+	}
+
+	a {
+		text-decoration: none;
+		font-family: $font-stack-sans;
+		font-weight: 600;
+	}
+}
+
+// Footer navigation
+.footer-navigation {
+	margin-bottom: $spacing-unit;
+
+	ul {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		display: flex;
+		justify-content: center;
+		gap: $spacing-unit;
+	}
+
+	a {
+		font-size: 0.9rem;
+	}
+}

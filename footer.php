@@ -3,20 +3,26 @@
 /**
  * The template for displaying the footer
  *
- * Contains the closing of the #content div and all content after.
- *
  * @package ForgePress
  */
 ?>
 
-	</div>
-	<footer id="colophon" class="site-footer">
+	</div><footer id="colophon" class="site-footer">
+		<nav class="footer-navigation">
+			<?php
+			wp_nav_menu(
+				array(
+					'theme_location' => 'footer',
+					'menu_id'        => 'footer-menu',
+					'depth'          => 1, // Only show top-level menu items in the footer.
+				)
+			);
+			?>
+		</nav>
+
 		<div class="site-info">
-			<p>&copy; <?php echo date('Y'); ?> <?php bloginfo('name'); ?></p>
-		</div>
-	</footer>
-</div>
-<?php wp_footer(); ?>
+			<p>&copy; <?php echo esc_html( date_i18n( 'Y' ) ); ?> <?php bloginfo( 'name' ); ?></p>
+		</div></footer></div><?php wp_footer(); ?>
 
 </body>
 </html>
