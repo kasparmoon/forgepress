@@ -18,16 +18,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 // 1. THEME SETUP
 // =============================================================================
 function forgepress_setup() {
-	// Add support for block-based widgets.
 	add_theme_support( 'widgets-block-editor' );
-
-	// Enable support for Post Thumbnails on posts and pages.
 	add_theme_support( 'post-thumbnails' );
-
-	// THIS IS THE NEW LINE: Add support for wide and full-width block alignments.
 	add_theme_support( 'align-wide' );
-
-	// Register navigation menus.
 	register_nav_menus(
 		array(
 			'primary' => esc_html__( 'Primary Menu', 'forgepress' ),
@@ -46,22 +39,17 @@ define( 'FORGEPRESS_PROD_URL', get_template_directory_uri() . '/dist' );
 define( 'FORGEPRESS_PROD_PATH', get_template_directory() . '/dist' );
 
 function forgepress_is_vite_dev() {
-	// To force dev mode for debugging, add `define( 'FORGEPRESS_VITE_DEV', true );` to your wp-config.php file.
 	return defined( 'FORGEPRESS_VITE_DEV' ) && true === constant( 'FORGEPRESS_VITE_DEV' );
 }
 
 function forgepress_enqueue_scripts() {
 	if ( forgepress_is_vite_dev() ) {
-		// Development mode (npm run dev)
 		wp_enqueue_script( 'vite-client', FORGEPRESS_DEV_SERVER . '/@vite/client', array(), null, true );
 		wp_enqueue_script( 'forgepress-main-js', FORGEPRESS_DEV_SERVER . '/src/main.jsx', array( 'vite-client' ), '1.0.0', true );
 	} else {
-		// Production mode (npm run build)
 		$manifest_path = FORGEPRESS_PROD_PATH . '/.vite/manifest.json';
-
 		if ( file_exists( $manifest_path ) ) {
 			$manifest = json_decode( file_get_contents( $manifest_path ), true );
-
 			if ( ! empty( $manifest['src/main.jsx']['file'] ) ) {
 				wp_enqueue_script( 'forgepress-main-js', FORGEPRESS_PROD_URL . '/' . $manifest['src/main.jsx']['file'], array(), false, true );
 			}
@@ -85,6 +73,24 @@ add_filter( 'script_loader_tag', 'forgepress_add_module_to_script', 10, 3 );
 
 
 // =============================================================================
-// 3. INCLUDE ADDITIONAL FILES
+// 3. FILTERS AND ACTIONS
+// =============================================================================
+
+/**
+ * Adds custom classes to the array of body classes.
+ *
+ * @param array $classes Classes for the body element.
+ * @return array
+ */
+function forgepress_body_classes( $classes ) {
+	$site_layout = get_theme_mod( 'forgepress_site_layout', 'boxed' );
+	$classes[]   = 'layout-' . $site_layout;
+	return $classes;
+}
+add_filter( 'body_class', 'forgepress_body_classes' );
+
+
+// =============================================================================
+// 4. INCLUDE ADDITIONAL FILES
 // =============================================================================
 require_once get_template_directory() . '/inc/customizer.php';
