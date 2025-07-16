@@ -17,7 +17,7 @@
  */
 function forgepress_customize_register( $wp_customize ) {
 
-	// 1. Add a new Panel for all our theme options.
+	// Add Panel for all our theme options.
 	$wp_customize->add_panel(
 		'forgepress_theme_options',
 		array(
@@ -26,7 +26,7 @@ function forgepress_customize_register( $wp_customize ) {
 		)
 	);
 
-	// 2. Add a Section for Layout.
+	// --- Layout Section ---
 	$wp_customize->add_section(
 		'forgepress_layout_section',
 		array(
@@ -35,20 +35,12 @@ function forgepress_customize_register( $wp_customize ) {
 		)
 	);
 
-	// 3. Add a Setting for the Site Layout.
-	$wp_customize->add_setting(
-		'forgepress_site_layout',
-		array(
-			'default'           => 'boxed',
-			'sanitize_callback' => 'sanitize_key',
-		)
-	);
-
-	// 4. Add a Control for the Site Layout.
+	// Global Site Layout Setting & Control
+	$wp_customize->add_setting( 'forgepress_site_layout', array( 'default' => 'boxed', 'sanitize_callback' => 'sanitize_key' ) );
 	$wp_customize->add_control(
 		'forgepress_site_layout_control',
 		array(
-			'label'    => __( 'Site Layout', 'forgepress' ),
+			'label'    => __( 'Global Site Layout', 'forgepress' ),
 			'section'  => 'forgepress_layout_section',
 			'settings' => 'forgepress_site_layout',
 			'type'     => 'radio',
@@ -59,7 +51,60 @@ function forgepress_customize_register( $wp_customize ) {
 		)
 	);
 
-	// 5. Add a Section for Colors.
+	// Sidebar Layout Setting & Control
+	$wp_customize->add_setting( 'forgepress_sidebar_layout', array( 'default' => 'no-sidebar', 'sanitize_callback' => 'sanitize_key' ) );
+	$wp_customize->add_control(
+		'forgepress_sidebar_layout_control',
+		array(
+			'label'    => __( 'Sidebar Layout', 'forgepress' ),
+			'section'  => 'forgepress_layout_section',
+			'settings' => 'forgepress_sidebar_layout',
+			'type'     => 'select',
+			'choices'  => array(
+				'no-sidebar'       => __( 'No Sidebar', 'forgepress' ),
+				'sidebar-right'    => __( 'Right Single Sidebar', 'forgepress' ),
+				'sidebar-left'     => __( 'Left Single Sidebar', 'forgepress' ),
+				'sidebar-both'     => __( 'Left and Right Sidebars', 'forgepress' ),
+				'sidebar-double-right' => __( 'Right Side Double Sidebar', 'forgepress' ),
+			),
+		)
+	);
+
+	// --- Sidebar Display Section ---
+	$wp_customize->add_section(
+		'forgepress_sidebar_display_section',
+		array(
+			'title'       => __( 'Sidebar Display', 'forgepress' ),
+			'description' => __( 'Choose where to display your chosen sidebar layout.', 'forgepress' ),
+			'panel'       => 'forgepress_theme_options',
+		)
+	);
+
+	// Show Sidebar on Blog/Archives Setting & Control
+	$wp_customize->add_setting( 'forgepress_sidebar_show_on_blog', array( 'default' => false, 'sanitize_callback' => 'rest_sanitize_boolean' ) );
+	$wp_customize->add_control(
+		'forgepress_sidebar_show_on_blog_control',
+		array(
+			'label'    => __( 'Show on Blog / Archives', 'forgepress' ),
+			'section'  => 'forgepress_sidebar_display_section',
+			'settings' => 'forgepress_sidebar_show_on_blog',
+			'type'     => 'checkbox',
+		)
+	);
+
+	// Show Sidebar on Single Posts Setting & Control
+	$wp_customize->add_setting( 'forgepress_sidebar_show_on_posts', array( 'default' => false, 'sanitize_callback' => 'rest_sanitize_boolean' ) );
+	$wp_customize->add_control(
+		'forgepress_sidebar_show_on_posts_control',
+		array(
+			'label'    => __( 'Show on Single Posts', 'forgepress' ),
+			'section'  => 'forgepress_sidebar_display_section',
+			'settings' => 'forgepress_sidebar_show_on_posts',
+			'type'     => 'checkbox',
+		)
+	);
+
+	// --- Colors Section ---
 	$wp_customize->add_section(
 		'forgepress_colors_section',
 		array(
@@ -68,16 +113,8 @@ function forgepress_customize_register( $wp_customize ) {
 		)
 	);
 
-	// 6. Add a Setting for the Primary Accent Color.
-	$wp_customize->add_setting(
-		'forgepress_accent_color',
-		array(
-			'default'           => '#0073aa',
-			'sanitize_callback' => 'sanitize_hex_color',
-		)
-	);
-
-	// 7. Add a Control for the Primary Accent Color.
+	// Primary Accent Color Setting & Control
+	$wp_customize->add_setting( 'forgepress_accent_color', array( 'default' => '#0073aa', 'sanitize_callback' => 'sanitize_hex_color' ) );
 	$wp_customize->add_control(
 		new WP_Customize_Color_Control(
 			$wp_customize,
@@ -92,6 +129,7 @@ function forgepress_customize_register( $wp_customize ) {
 
 }
 add_action( 'customize_register', 'forgepress_customize_register' );
+
 
 /**
  * Generate CSS from the Customizer settings and output to the head.

@@ -30,6 +30,37 @@ function forgepress_setup() {
 }
 add_action( 'after_setup_theme', 'forgepress_setup' );
 
+/**
+ * Register widget area.
+ *
+ * @link https://developer.wordpress.org/themes/functionality/sidebars/#registering-a-sidebar
+ */
+function forgepress_widgets_init() {
+	register_sidebar(
+		array(
+			'name'          => esc_html__( 'Primary Sidebar', 'forgepress' ),
+			'id'            => 'sidebar-1',
+			'description'   => esc_html__( 'Add widgets here.', 'forgepress' ),
+			'before_widget' => '<section id="%1$s" class="widget %2$s">',
+			'after_widget'  => '</section>',
+			'before_title'  => '<h2 class="widget-title">',
+			'after_title'   => '</h2>',
+		)
+	);
+	register_sidebar(
+		array(
+			'name'          => esc_html__( 'Secondary Sidebar', 'forgepress' ),
+			'id'            => 'sidebar-2',
+			'description'   => esc_html__( 'Add widgets here for three-column layouts.', 'forgepress' ),
+			'before_widget' => '<section id="%1$s" class="widget %2$s">',
+			'after_widget'  => '</section>',
+			'before_title'  => '<h2 class="widget-title">',
+			'after_title'   => '</h2>',
+		)
+	);
+}
+add_action( 'widgets_init', 'forgepress_widgets_init' );
+
 
 // =============================================================================
 // 2. VITE ASSET INTEGRATION
@@ -39,6 +70,7 @@ define( 'FORGEPRESS_PROD_URL', get_template_directory_uri() . '/dist' );
 define( 'FORGEPRESS_PROD_PATH', get_template_directory() . '/dist' );
 
 function forgepress_is_vite_dev() {
+	// To force dev mode for debugging, add `define( 'FORGEPRESS_VITE_DEV', true );` to your wp-config.php file.
 	return defined( 'FORGEPRESS_VITE_DEV' ) && true === constant( 'FORGEPRESS_VITE_DEV' );
 }
 
