@@ -1,0 +1,41 @@
+@use 'variables' as *;
+
+.widget-area {
+	// This is the container for all widgets in a sidebar
+}
+
+.widget {
+	margin-bottom: $spacing-unit * 2;
+	padding: $spacing-unit;
+	border: 1px solid $color-border;
+
+	.widget-title {
+		font-size: 1.2rem;
+		margin-top: 0;
+		margin-bottom: $spacing-unit;
+		padding-bottom: $spacing-unit / 2;
+		border-bottom: 2px solid var(--primary-accent-color);
+	}
+
+	ul {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+
+		li {
+			padding: 0.25rem 0;
+		}
+	}
+
+	// Basic styling for the search widget within the sidebar
+	.search-form {
+		display: flex;
+	}
+	.search-field {
+		flex-grow: 1;
+		width: 100%;
+	}
+	.search-submit {
+		flex-shrink: 0;
+	}
+}
