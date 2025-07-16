@@ -24,7 +24,6 @@
 	margin-bottom: 0.5rem;
 }
 
-// New styles for the post thumbnail
 .post-thumbnail {
 	margin-bottom: $spacing-unit;
 
@@ -32,5 +31,26 @@
 		max-width: 100%;
 		height: auto;
 		display: block;
+	}
+}
+
+// New styles for the entry footer and edit link
+.entry-footer {
+	margin-top: $spacing-unit;
+	font-size: 0.85rem;
+
+	.edit-link a {
+		// Style the edit link to look like a small button or tag
+		display: inline-block;
+		padding: 0.25rem 0.75rem;
+		background-color: #f0f0f0;
+		border-radius: 3px;
+		color: #555;
+		font-weight: 600;
+
+		&:hover {
+			background-color: #e0e0e0;
+			color: var(--primary-accent-color);
+		}
 	}
 }
