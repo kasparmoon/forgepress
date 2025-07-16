@@ -30,11 +30,6 @@ function forgepress_setup() {
 }
 add_action( 'after_setup_theme', 'forgepress_setup' );
 
-/**
- * Register widget area.
- *
- * @link https://developer.wordpress.org/themes/functionality/sidebars/#registering-a-sidebar
- */
 function forgepress_widgets_init() {
 	register_sidebar(
 		array(
@@ -70,7 +65,6 @@ define( 'FORGEPRESS_PROD_URL', get_template_directory_uri() . '/dist' );
 define( 'FORGEPRESS_PROD_PATH', get_template_directory() . '/dist' );
 
 function forgepress_is_vite_dev() {
-	// To force dev mode for debugging, add `define( 'FORGEPRESS_VITE_DEV', true );` to your wp-config.php file.
 	return defined( 'FORGEPRESS_VITE_DEV' ) && true === constant( 'FORGEPRESS_VITE_DEV' );
 }
 
@@ -115,8 +109,29 @@ add_filter( 'script_loader_tag', 'forgepress_add_module_to_script', 10, 3 );
  * @return array
  */
 function forgepress_body_classes( $classes ) {
+	// Global Layout (Boxed vs. Full-Width).
 	$site_layout = get_theme_mod( 'forgepress_site_layout', 'boxed' );
 	$classes[]   = 'layout-' . $site_layout;
+
+	// Sidebar Layout Logic.
+	$sidebar_layout = 'layout-no-sidebar'; // Default to no sidebar.
+
+	// Get sidebar settings from the Customizer.
+	$show_on_blog = get_theme_mod( 'forgepress_sidebar_show_on_blog', false );
+	$show_on_posts = get_theme_mod( 'forgepress_sidebar_show_on_posts', false );
+	$chosen_layout = get_theme_mod( 'forgepress_sidebar_layout', 'no-sidebar' );
+
+	// Check if we are on a page where sidebars should be shown.
+	if ( ( is_home() || is_archive() || is_search() ) && true === $show_on_blog ) {
+		$sidebar_layout = 'layout-' . $chosen_layout;
+	} elseif ( is_single() && true === $show_on_posts ) {
+		$sidebar_layout = 'layout-' . $chosen_layout;
+	}
+	// To add support for Pages, you would add:
+	// elseif ( is_page() && get_theme_mod('forgepress_sidebar_show_on_pages', false) ) { ... }
+
+	$classes[] = $sidebar_layout;
+
 	return $classes;
 }
 add_filter( 'body_class', 'forgepress_body_classes' );
