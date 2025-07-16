@@ -2,16 +2,16 @@
 
 // General body styles
 body {
-	background-color: #f0f0f0; // Use a light gray for the page background
+	background-color: #f0f0f0;
 	color: $color-text;
 }
 
 // Main site container
 .site {
-	padding: 0 $spacing-unit; // Add padding on the sides
+	padding: 0 $spacing-unit;
 }
 
-// When the layout is "Boxed"
+// Layout modifiers based on body class
 .layout-boxed .site {
 	max-width: $content-width + 40px;
 	margin: 0 auto;
@@ -19,71 +19,87 @@ body {
 	padding: $spacing-unit * 2;
 }
 
-// When the layout is "Full Width"
 .layout-full-width .site {
 	max-width: 100%;
 }
 
 // --- THIS IS THE NEW SIDEBAR LAYOUT GRID ---
-
-// When a sidebar is active, turn the .site container into a grid
-.layout-sidebar-left .site,
-.layout-sidebar-right .site,
-.layout-sidebar-both .site,
-.layout-sidebar-double-right .site {
+// This targets the new wrapper div we added in our templates
+.site-content-grid {
 	display: grid;
-	grid-template-columns: repeat(12, 1fr); // A 12-column grid
+	grid-template-columns: repeat(12, 1fr);
 	grid-column-gap: $spacing-unit;
 }
 
-// Assign elements to grid columns based on the layout
-.layout-sidebar-right .site {
-	#primary { grid-column: 1 / 9; }   // Content takes 8 columns
-	#secondary { grid-column: 9 / 13; } // Sidebar takes 4 columns
+// Default state (no sidebar)
+#primary {
+	grid-column: 1 / -1; // Content spans all 12 columns
+}
+#secondary, #tertiary {
+	display: none; // Hide sidebars by default
 }
 
-.layout-sidebar-left .site {
-	#primary { grid-column: 5 / 13; } // Content takes 8 columns
+// Right Sidebar Layout
+.layout-sidebar-right {
+	#primary { grid-column: 1 / 9; }
 	#secondary {
-		grid-column: 1 / 5;   // Sidebar takes 4 columns
-		grid-row: 1;          // Ensure sidebar is in the first row
+		display: block;
+		grid-column: 9 / 13;
 	}
 }
 
-.layout-sidebar-both .site {
-	#primary { grid-column: 4 / 10; } // Content takes 6 columns
-	#secondary {
-		grid-column: 1 / 4;   // Left sidebar takes 3 columns
+// Left Sidebar Layout
+.layout-sidebar-left {
+	#primary {
+		grid-column: 5 / 13;
 		grid-row: 1;
 	}
-	#tertiary { grid-column: 10 / 13; } // Right sidebar takes 3 columns
+	#secondary {
+		display: block;
+		grid-column: 1 / 5;
+		grid-row: 1;
+	}
 }
 
-.layout-sidebar-double-right .site {
-	#primary { grid-column: 1 / 7; } // Content takes 6 columns
-	#secondary { grid-column: 7 / 10; } // First right sidebar takes 3
-	#tertiary { grid-column: 10 / 13; } // Second right sidebar takes 3
+// Both Sidebars Layout
+.layout-sidebar-both {
+	#primary {
+		grid-column: 4 / 10;
+		grid-row: 1;
+	}
+	#secondary {
+		display: block;
+		grid-column: 1 / 4;
+		grid-row: 1;
+	}
+	#tertiary {
+		display: block;
+		grid-column: 10 / 13;
+	}
 }
 
+// Double Right Sidebars Layout
+.layout-sidebar-double-right {
+	#primary { grid-column: 1 / 7; }
+	#secondary {
+		display: block;
+		grid-column: 7 / 10;
+	}
+	#tertiary {
+		display: block;
+		grid-column: 10 / 13;
+	}
+}
 
 // --- Original Styles ---
-
-// This structure is still needed for Wide/Full block breakouts
 .site-main > * {
 	display: grid;
 	grid-template-columns: 1fr min($content-width, 100%) 1fr;
-
 	> * {
 		grid-column: 2;
 	}
 }
+.alignwide { /* etc */ }
+.alignfull { /* etc */ }
 
-.alignwide { /* etc. */ }
-.alignfull { /* etc. */ }
-
-// Styles for individual articles in the blog list
-.post {
-	padding-bottom: $spacing-unit;
-	margin-bottom: $spacing-unit;
-	border-bottom: 1px solid $color-border;
-}
+.post { /* etc */ }
