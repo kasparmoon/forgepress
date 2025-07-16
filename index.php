@@ -9,33 +9,28 @@
 get_header();
 ?>
 
-<main id="main" class="site-main">
+<div id="primary" class="content-area">
+	<main id="main" class="site-main">
 
-	<?php
-	if (have_posts()) :
+		<?php
+		if ( have_posts() ) :
 
-		// Start the Loop.
-		while (have_posts()) :
-			the_post();
-			?>
-			<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-				<header class="entry-header">
-					<?php the_title('<h2 class="entry-title"><a href="' . esc_url(get_permalink()) . '" rel="bookmark">', '</a></h2>'); ?>
-				</header>
-				<div class="entry-content">
-					<?php the_content(); ?>
-				</div>
-			</article>
-			<?php
-		endwhile;
+			// Start the Loop.
+			while ( have_posts() ) :
+				the_post();
+				get_template_part( 'template-parts/content', get_post_type() );
+			endwhile;
 
-	else :
-		// If no content, include the "No posts found" template.
-		echo '<p>No posts found.</p>';
+			// Previous/next page navigation.
+			the_posts_navigation();
 
-	endif;
-	?>
+		else :
+			// If no content, include the "No posts found" template.
+			get_template_part( 'template-parts/content', 'none' );
 
-</main>
-<?php
+		endif;
+		?>
+
+	</main></div><?php
+get_sidebar();
 get_footer();
