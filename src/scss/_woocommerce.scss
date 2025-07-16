@@ -1,0 +1,28 @@
+@use 'variables' as *;
+
+// Style WooCommerce notices (e.g., "Product added to cart")
+.woocommerce-message,
+.woocommerce-info,
+.woocommerce-error {
+	padding: 1em 2em;
+	margin: 0 0 2em;
+	border-top: 3px solid var(--primary-accent-color);
+	background-color: #f7f7f7;
+}
+
+// Style the main "Add to Cart" buttons
+.woocommerce button.button.alt,
+.woocommerce a.button.alt {
+	background-color: var(--primary-accent-color);
+	color: #fff;
+	font-weight: 600;
+
+	&:hover {
+		background-color: $color-text;
+	}
+}
+
+// Style the "On Sale!" badge
+.woocommerce span.onsale {
+	background-color: var(--primary-accent-color);
+}
