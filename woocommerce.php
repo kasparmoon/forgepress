@@ -1,7 +1,7 @@
 <?php
 // phpcs:ignoreFile
 /**
- * The template for displaying all pages
+ * The template for displaying WooCommerce pages
  *
  * @package ForgePress
  */
@@ -11,7 +11,13 @@ get_header(); ?>
 <div class="site-content-grid">
 	<div id="primary" class="content-area">
 		<main id="main" class="site-main">
-			<?php woocommerce_content(); ?>
+			<?php
+			if ( class_exists( 'WooCommerce' ) && function_exists( 'woocommerce_content' ) ) {
+				woocommerce_content();
+			} else {
+				echo '<p>WooCommerce is not active. Please activate the WooCommerce plugin.</p>';
+			}
+			?>
 		</main>
 	</div>
 
