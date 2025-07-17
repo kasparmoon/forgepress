@@ -3,7 +3,7 @@
 // General body styles
 body {
 	background-color: #f0f0f0;
-	color: $color-text-primary; // FIX: Was $color-text
+	color: $color-text-primary;
 }
 
 // Main site container
@@ -100,9 +100,9 @@ body {
 	width: 100vw;
 }
 
-// Post Styles
+// Styles for individual articles in the blog list
 .post {
 	padding-bottom: $spacing-unit;
 	margin-bottom: $spacing-unit;
-	border-bottom: 0px solid $color-border;
+	border-bottom: 1px solid $color-border; // This line is restored
 }
