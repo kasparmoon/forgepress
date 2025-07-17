@@ -1,36 +1,35 @@
 @use 'variables' as *;
 
 .site-header {
-    margin-bottom: $spacing-unit * 2;
-    border-bottom: 1px solid $color-border;
-    padding-bottom: $spacing-unit;
+	margin-bottom: $spacing-unit * 2;
+	border-bottom: 1px solid $color-border;
+	padding-bottom: $spacing-unit;
 }
 
 .site-title {
-    margin: 0;
-    font-size: 2rem;
-    font-weight: 700;
+	margin: 0;
+	font-size: 2rem;
+	font-weight: 700;
 
-    a {
-        color: $color-text; // Override the default link color for the main title
+	a {
+		color: $color-text-primary; // FIX: Was $color-text
 
-        &:hover {
-            color: var(--primary-accent-color);
-            opacity: 1;
-        }
-    }
+		&:hover {
+			color: var(--primary-accent-color);
+			opacity: 1;
+		}
+	}
 }
 
 .skip-link {
-    // Styles to hide the "skip to content" link until it's focused
-    position: absolute;
-    left: -9999px;
+	position: absolute;
+	left: -9999px;
 
-    &:focus {
-        left: 6px;
-        top: 7px;
-        background-color: $color-background;
-        padding: 15px;
-        z-index: 1000;
-    }
+	&:focus {
+		left: 6px;
+		top: 7px;
+		background-color: $color-background;
+		padding: 15px;
+		z-index: 1000;
+	}
 }

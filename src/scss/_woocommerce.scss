@@ -7,7 +7,7 @@
 	padding: 1em 2em;
 	margin: 0 0 2em;
 	border-top: 3px solid var(--primary-accent-color);
-	background-color: #f7f7f7;
+	background-color: $color-background-subtle;
 }
 
 // Style the main "Add to Cart" buttons
@@ -16,9 +16,11 @@
 	background-color: var(--primary-accent-color);
 	color: #fff;
 	font-weight: 600;
+	border-radius: $border-radius;
 
 	&:hover {
-		background-color: $color-text;
+		background-color: $color-text-primary; // FIX: Was $color-text
+		opacity: 0.9;
 	}
 }
 
