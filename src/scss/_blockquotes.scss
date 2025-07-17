@@ -1,0 +1,14 @@
+@use 'variables' as *;
+
+blockquote {
+	margin: $spacing-unit 0;
+	padding: $spacing-unit / 2 $spacing-unit;
+	border-left: 4px solid var(--primary-accent-color);
+	background-color: $color-background-subtle;
+	font-size: 1.1rem;
+	font-style: italic;
+
+	p:last-child {
+		margin-bottom: 0;
+	}
+}

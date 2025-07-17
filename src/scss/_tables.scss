@@ -1,0 +1,23 @@
+@use 'variables' as *;
+
+table {
+	width: 100%;
+	border-collapse: collapse;
+	margin: $spacing-unit 0;
+}
+
+th,
+td {
+	padding: $spacing-unit / 2;
+	border: 1px solid $color-border;
+	text-align: left;
+}
+
+thead,
+tfoot {
+	background-color: $color-background-subtle;
+}
+
+th {
+	font-weight: 700;
+}
