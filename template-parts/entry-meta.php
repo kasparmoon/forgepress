@@ -25,4 +25,6 @@
 		);
 		?>
 	</span>
+	<span class="meta-separator" aria-hidden="true">&middot;</span>
+	<?php forgepress_display_reading_time(); ?>
 </div>

@@ -65,9 +65,6 @@ define( 'FORGEPRESS_DEV_SERVER', 'http://localhost:5173' );
 define( 'FORGEPRESS_PROD_URL', get_template_directory_uri() . '/dist' );
 define( 'FORGEPRESS_PROD_PATH', get_template_directory() . '/dist' );
 
-/**
- * Enqueue Google Fonts
- */
 function forgepress_enqueue_fonts() {
 	wp_enqueue_style( 'forgepress-google-fonts', 'https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap', array(), null );
 }
@@ -129,7 +126,32 @@ add_filter( 'body_class', 'forgepress_body_classes' );
 
 
 // =============================================================================
-// 4. INCLUDE ADDITIONAL FILES
+// 4. TEMPLATE TAGS & HELPERS
+// =============================================================================
+
+/**
+ * Calculates and displays the estimated reading time for a post.
+ *
+ * @since 1.0.0
+ */
+function forgepress_display_reading_time() {
+	$content    = get_post_field( 'post_content', get_the_ID() );
+	$word_count = str_word_count( strip_tags( $content ) );
+	$wpm        = 200; // Average words per minute.
+	$minutes    = ceil( $word_count / $wpm );
+
+	// If the reading time is less than 1 minute, show "1 min read".
+	$reading_time = ( $minutes < 1 ) ? 1 : $minutes;
+
+	// Translators: %s is the estimated reading time in minutes.
+	$text = sprintf( esc_html__( '%s min read', 'forgepress' ), $reading_time );
+
+	echo '<span class="reading-time"><span class="dashicons dashicons-clock"></span>' . esc_html( $text ) . '</span>';
+}
+
+
+// =============================================================================
+// 5. INCLUDE ADDITIONAL FILES
 // =============================================================================
 require_once get_template_directory() . '/inc/customizer.php';
 

@@ -4,10 +4,18 @@
 	font-size: 0.85rem;
 	color: $color-text-secondary;
 	margin-bottom: $spacing-unit;
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap; // Allows items to wrap on small screens
 
 	.byline,
-	.posted-on {
-		margin-right: $spacing-unit;
+	.posted-on,
+	.reading-time {
+		margin-right: $spacing-unit / 2;
+	}
+
+	.meta-separator {
+		margin-right: $spacing-unit / 2;
 	}
 
 	a {
@@ -17,6 +25,15 @@
 		&:hover {
 			color: var(--primary-accent-color);
 		}
+	}
+}
+
+.reading-time {
+	display: inline-flex;
+	align-items: center;
+	.dashicons {
+		margin-right: 0.25rem;
+		font-size: 1rem;
 	}
 }
 
@@ -34,7 +51,6 @@
 	}
 }
 
-// THIS IS THE NEW FIX:
 // On single posts and pages, remove the bottom border from the main article
 // because the comments area provides its own top border.
 .single-post .post,
