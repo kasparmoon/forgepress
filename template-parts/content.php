@@ -17,7 +17,12 @@
 			the_title( '<h2 class="entry-title"><a href="' . esc_url( get_permalink() ) . '" rel="bookmark">', '</a></h2>' );
 		endif;
 		?>
-	</header><?php if ( has_post_thumbnail() ) : ?>
+	</header><?php
+	// Display the post meta (date, author, reading time).
+	get_template_part( 'template-parts/entry-meta' );
+	?>
+
+	<?php if ( has_post_thumbnail() ) : ?>
 		<div class="post-thumbnail">
 			<a href="<?php the_permalink(); ?>">
 				<?php the_post_thumbnail( 'large' ); ?>
