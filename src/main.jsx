@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './style.scss'; // Changed from .css to .scss
+import './js/search-modal.js'; // Importing the search modal JavaScript
 
 // A simple React component
 function App() {

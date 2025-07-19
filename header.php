@@ -23,13 +23,37 @@
 	<header id="masthead" class="site-header">
 		<div class="site-branding">
 			<h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
-		</div><nav id="site-navigation" class="main-navigation">
-			<?php
-			wp_nav_menu(
-				array(
-					'theme_location' => 'primary',
-					'menu_id'        => 'primary-menu',
-				)
-			);
-			?>
-		</nav></header><div id="content" class="site-content">
+		</div>
+
+		<nav id="site-navigation" class="main-navigation">
+			<?php wp_nav_menu( array( 'theme_location' => 'primary', 'menu_id' => 'primary-menu' ) ); ?>
+		</nav>
+
+		<div class="header-actions">
+			<div class="header-social-links">
+				<?php
+				$social_networks = array( 'facebook', 'twitter', 'instagram', 'linkedin', 'youtube' );
+				foreach ( $social_networks as $network ) {
+					$link = get_theme_mod( 'forgepress_social_' . $network . '_link' );
+					if ( ! empty( $link ) ) {
+						echo '<a href="' . esc_url( $link ) . '" class="social-link social-' . esc_attr( $network ) . '" target="_blank" rel="noopener noreferrer">' . forgepress_get_svg_icon( $network ) . '<span class="screen-reader-text">' . esc_html( ucwords( $network ) ) . '</span></a>';
+					}
+				}
+				?>
+			</div>
+			<div class="header-search">
+				<button class="search-toggle" aria-controls="search-modal" aria-expanded="false">
+					<?php echo forgepress_get_svg_icon( 'search' ); ?>
+					<span class="screen-reader-text"><?php esc_html_e( 'Search', 'forgepress' ); ?></span>
+				</button>
+			</div>
+		</div>
+	</header>
+
+	<div class="search-modal-container">
+		<div class="search-modal">
+			<?php get_search_form(); ?>
+		</div>
+	</div>
+
+	<div id="content" class="site-content">

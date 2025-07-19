@@ -1,16 +1,17 @@
-@forward 'variables';
-@forward 'typography';
-@forward 'layout';
-@forward 'header';
-@forward 'posts';
-@forward '404';
-@forward 'archives';
-@forward 'comments';
-@forward 'navigation';
-@forward 'widgets';
-@forward 'woocommerce';
-@forward 'forms';
-@forward 'blockquotes';
-@forward 'tables';
-@forward 'post-navigation';
-@forward 'footer';
+@forward 'variables'; // Forwarding variables
+@forward 'typography'; // Forwarding typography styles
+@forward 'layout';  // Forwarding layout styles
+@forward 'header'; // Forwarding header styles
+@forward 'posts';  // Forwarding post styles
+@forward '404'; // Forwarding 404 page styles
+@forward 'archives';   // Forwarding archive styles
+@forward 'comments';    // Forwarding comments styles
+@forward 'navigation';  // Forwarding navigation styles
+@forward 'widgets'; // Forwarding widget styles
+@forward 'woocommerce'; // Forwarding WooCommerce styles
+@forward 'forms';   // Forwarding form styles
+@forward 'blockquotes'; // Forwarding blockquote styles
+@forward 'tables';  // Forwarding table styles
+@forward 'post-navigation'; // Forwarding post navigation styles
+@forward 'footer'; // Forwarding footer styles
+@forward 'header-icons'; // Forwarding header icons styles

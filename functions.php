@@ -154,6 +154,7 @@ function forgepress_display_reading_time() {
 // 5. INCLUDE ADDITIONAL FILES
 // =============================================================================
 require_once get_template_directory() . '/inc/customizer.php';
+require_once get_template_directory() . '/inc/icons.php';
 
 if ( class_exists( 'WooCommerce' ) ) {
 	require_once get_template_directory() . '/inc/woocommerce.php';
