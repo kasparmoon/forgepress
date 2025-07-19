@@ -9,6 +9,10 @@
 
 	</div></div><footer id="colophon" class="site-footer">
 	<div class="footer-inner container">
+		<div class="site-info">
+			<p>&copy; <?php echo esc_html( date_i18n( 'Y' ) ); ?> <?php bloginfo( 'name' ); ?></p>
+		</div>
+
 		<nav class="footer-navigation">
 			<?php
 			wp_nav_menu(
@@ -21,9 +25,7 @@
 			?>
 		</nav>
 
-		<div class="site-info">
-			<p>&copy; <?php echo esc_html( date_i18n( 'Y' ) ); ?> <?php bloginfo( 'name' ); ?></p>
-		</div></div></footer><?php wp_footer(); ?>
+	</div></footer><?php wp_footer(); ?>
 
 </body>
 </html>
