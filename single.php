@@ -47,6 +47,14 @@ get_header(); ?>
 					comments_template();
 				endif;
 
+				// Previous/next post navigation.
+				the_post_navigation(
+					array(
+						'prev_text' => '<span class="nav-title-meta"><span class="dashicons dashicons-arrow-left-alt2"></span>' . esc_html__( 'Previous Post', 'forgepress' ) . '</span> <span class="nav-title">%title</span>',
+						'next_text' => '<span class="nav-title-meta">' . esc_html__( 'Next Post', 'forgepress' ) . '<span class="dashicons dashicons-arrow-right-alt2"></span></span> <span class="nav-title">%title</span>',
+					)
+				);
+
 			endwhile; // End of the loop.
 			?>
 

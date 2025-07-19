@@ -1,0 +1,49 @@
+@use 'variables' as *;
+
+.post-navigation {
+	margin-top: $spacing-unit * 2;
+	border-top: 1px solid $color-border;
+	padding-top: $spacing-unit;
+
+	.nav-links {
+		display: flex;
+		justify-content: space-between;
+		align-items: flex-start;
+		gap: $spacing-unit;
+	}
+
+	.nav-previous {
+		text-align: left;
+	}
+
+	.nav-next {
+		text-align: right;
+	}
+
+	.nav-title-meta {
+		display: block;
+		font-size: 0.8rem;
+		color: $color-text-secondary;
+		margin-bottom: 0.25rem;
+		display: inline-flex;
+		align-items: center;
+
+		.dashicons {
+			font-size: 1rem;
+			line-height: inherit;
+		}
+	}
+
+	.nav-previous .dashicons {
+		margin-right: 0.25em;
+	}
+
+	.nav-next .dashicons {
+		margin-left: 0.25em;
+	}
+
+	.nav-title {
+		font-family: $font-stack-headings;
+		font-weight: 700;
+	}
+}
