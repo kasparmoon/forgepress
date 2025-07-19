@@ -3,8 +3,17 @@
 .site-footer {
 	background-color: var(--color-footer-background-color);
 	color: var(--color-footer-text-color);
-	padding: $spacing-unit * 2 $spacing-unit;
-	text-align: center;
+	padding: $spacing-unit * 2 0;
+}
+
+.footer-inner {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+
+	p {
+		margin: 0;
+	}
 
 	a {
 		color: var(--color-footer-menu-text-color);

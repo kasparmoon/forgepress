@@ -1,26 +1,26 @@
 // =============================================================================
 // 1. FONTS
 // =============================================================================
-$font-stack-base: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-$font-stack-headings: 'Inter', sans-serif;
+$font-stack-base: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; // Base font stack for body text
+$font-stack-headings: 'Inter', sans-serif; // Headings use the same font for consistency
 
 
 // =============================================================================
 // 2. COLORS
 // =============================================================================
-$color-background: #FFFFFF;
+$color-background: #FFFFFF; // A clean white background for the main content
 $color-background-subtle: #F9FAFB; // A very light gray for subtle backgrounds
 
 $color-text-primary: #111827; // A near-black for primary text
 $color-text-secondary: #6B7280; // A gray for meta text, captions, etc.
 
 $color-border: #E5E7EB; // A light, neutral border color
-$color-border-focus: #9CA3AF;
+$color-border-focus: #9CA3AF; // A slightly darker gray for focus states
 
 
 // =============================================================================
 // 3. LAYOUT & SPACING
 // =============================================================================
-$content-width: 800px;
+$content-width: 1120px; // Maximum width for main content
 $spacing-unit: 1.5rem; // Base spacing unit (24px)
 $border-radius: 3px; // A slight border radius for a "sharp" but not harsh look

@@ -6,21 +6,32 @@ body {
 	color: var(--color-primary-text-color);
 }
 
-// Main site container
-.site {
-	padding: 0 $spacing-unit;
+// Reusable container class to keep inner content aligned
+.container {
+	width: 100%;
+	max-width: $content-width;
+	margin-left: auto;
+	margin-right: auto;
+	padding-left: $spacing-unit;
+	padding-right: $spacing-unit;
 }
 
-// Layout modifiers based on body class
-.layout-boxed .site {
-	max-width: $content-width + 40px;
-	margin: 0 auto;
-	background-color: var(--color-content-background-color); // Use the new Customizer variable
-	padding: $spacing-unit * 2;
+// --- Layout variations ---
+.layout-full-width {
+	// In this mode, the .site container has no max-width
+	.site {
+		max-width: 100%;
+	}
 }
 
-.layout-full-width .site {
-	max-width: 100%;
+.layout-boxed {
+	// In this mode, the .site container gets a max-width and background
+	.site {
+		max-width: $content-width;
+		margin: $spacing-unit auto;
+		background-color: var(--color-content-background-color);
+		padding: $spacing-unit * 2;
+	}
 }
 
 // --- Sidebar Layout Grid ---

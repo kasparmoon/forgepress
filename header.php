@@ -17,10 +17,10 @@
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
 
-<div id="page" class="site">
-	<a class="skip-link screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', 'forgepress' ); ?></a>
+<a class="skip-link screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', 'forgepress' ); ?></a>
 
-	<header id="masthead" class="site-header">
+<header id="masthead" class="site-header">
+	<div class="header-inner container">
 		<div class="site-branding">
 			<h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
 		</div>
@@ -48,12 +48,11 @@
 				</button>
 			</div>
 		</div>
-	</header>
-
-	<div class="search-modal-container">
-		<div class="search-modal">
-			<?php get_search_form(); ?>
-		</div>
+	</div></header><div class="search-modal-container">
+	<div class="search-modal">
+		<?php get_search_form(); ?>
 	</div>
+</div>
 
+<div id="page" class="site">
 	<div id="content" class="site-content">
