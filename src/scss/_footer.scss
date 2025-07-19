@@ -1,0 +1,12 @@
+@use 'variables' as *;
+
+.site-footer {
+	background-color: var(--color-footer-background-color);
+	color: var(--color-footer-text-color);
+	padding: $spacing-unit * 2 $spacing-unit;
+	text-align: center;
+
+	a {
+		color: var(--color-footer-menu-text-color);
+	}
+}

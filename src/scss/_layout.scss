@@ -2,8 +2,8 @@
 
 // General body styles
 body {
-	background-color: #f0f0f0;
-	color: $color-text-primary;
+	background-color: var(--color-website-background-color);
+	color: var(--color-primary-text-color);
 }
 
 // Main site container
@@ -15,7 +15,7 @@ body {
 .layout-boxed .site {
 	max-width: $content-width + 40px;
 	margin: 0 auto;
-	background-color: $color-background;
+	background-color: var(--color-content-background-color); // Use the new Customizer variable
 	padding: $spacing-unit * 2;
 }
 
@@ -23,13 +23,14 @@ body {
 	max-width: 100%;
 }
 
-// Sidebar Layout Grid
+// --- Sidebar Layout Grid ---
 .site-content-grid {
 	display: grid;
 	grid-template-columns: repeat(12, 1fr);
 	grid-column-gap: $spacing-unit;
 }
 
+// Default state (no sidebar)
 #primary {
 	grid-column: 1 / -1;
 }
@@ -78,7 +79,7 @@ body {
 	grid-column: 10 / 13;
 }
 
-// Block Alignment Grid
+// --- Block Alignment Grid ---
 .site-main > * {
 	display: grid;
 	grid-template-columns: 1fr min($content-width, 100%) 1fr;
@@ -100,9 +101,9 @@ body {
 	width: 100vw;
 }
 
-// Styles for individual articles in the blog list
+// --- Styles for post listings ---
 .post {
 	padding-bottom: $spacing-unit;
 	margin-bottom: $spacing-unit;
-	border-bottom: 1px solid $color-border; // This line is restored
+	border-bottom: 1px solid $color-border;
 }
