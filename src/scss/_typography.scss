@@ -6,11 +6,16 @@ body {
 	font-size: 112.5%; // Sets a comfortable base font size of 18px
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
 	font-family: $font-stack-headings;
 	font-weight: 700;
 	line-height: 1.3;
-	color: $color-text-primary;
+	color: var(--color-primary-text-color);
 }
 
 a {
@@ -21,4 +26,14 @@ a {
 	&:hover {
 		opacity: 0.8;
 	}
+}
+
+// --- NEW FIX: Use a CSS variable for the header color ---
+// This ensures the Customizer setting for header text color is applied.
+.site-title a {
+	color: var(--color-site-title-color);
+}
+
+.main-navigation a {
+	color: var(--color-header-menu-text-color);
 }

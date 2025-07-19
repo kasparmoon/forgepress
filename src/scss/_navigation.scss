@@ -12,8 +12,13 @@
 
 	a {
 		text-decoration: none;
-		font-family: $font-stack-headings; // Use heading font for consistency
+		font-family: $font-stack-headings;
 		font-weight: 600;
+		color: var(--color-header-menu-text-color);
+
+		&:hover {
+			color: var(--primary-accent-color);
+		}
 	}
 }
 

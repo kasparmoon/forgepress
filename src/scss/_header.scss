@@ -3,7 +3,11 @@
 .site-header {
 	margin-bottom: $spacing-unit * 2;
 	border-bottom: 1px solid $color-border;
-	padding-bottom: $spacing-unit;
+	padding: $spacing-unit;
+	background-color: var(--color-header-background-color);
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
 }
 
 .site-title {
@@ -12,11 +16,11 @@
 	font-weight: 700;
 
 	a {
-		color: $color-text-primary; // FIX: Was $color-text
+		color: var(--color-site-title-color);
+		text-decoration: none;
 
 		&:hover {
-			color: var(--primary-accent-color);
-			opacity: 1;
+			opacity: 0.8;
 		}
 	}
 }
@@ -28,7 +32,7 @@
 	&:focus {
 		left: 6px;
 		top: 7px;
-		background-color: $color-background;
+		background-color: var(--color-content-background-color);
 		padding: 15px;
 		z-index: 1000;
 	}
