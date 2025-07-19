@@ -6,7 +6,7 @@
 	margin-bottom: $spacing-unit;
 	display: flex;
 	align-items: center;
-	flex-wrap: wrap; // Allows items to wrap on small screens
+	flex-wrap: wrap;
 
 	.byline,
 	.posted-on,
@@ -51,8 +51,6 @@
 	}
 }
 
-// On single posts and pages, remove the bottom border from the main article
-// because the comments area provides its own top border.
 .single-post .post,
 .page .post {
 	border-bottom: none;
