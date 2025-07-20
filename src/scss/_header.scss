@@ -7,20 +7,50 @@
 }
 
 .header-inner {
-	display: flex;
-	justify-content: space-between;
+	display: grid;
+	grid-template-columns: auto 1fr; // Column for logo, column for the rest
+	grid-template-rows: auto auto;    // Two rows for the menus
+	grid-template-areas:
+		"logo top-bar"
+		"logo main-bar";
 	align-items: center;
+	gap: 0 $spacing-unit * 2;
+}
+
+.site-branding {
+	grid-area: logo;
+	padding-right: $spacing-unit * 2;
+	border-right: 1px solid $color-border;
+}
+
+.header-top {
+	grid-area: top-bar;
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	gap: $spacing-unit;
+	padding-bottom: $spacing-unit / 2;
+	margin-bottom: $spacing-unit / 2;
+	border-bottom: 1px solid $color-border;
+}
+
+.header-main {
+	grid-area: main-bar;
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	gap: $spacing-unit;
 }
 
 .site-title {
 	margin: 0;
-	font-size: 2rem;
+	font-size: 2.5rem;
 	font-weight: 700;
+	line-height: 1;
 
 	a {
 		color: var(--color-site-title-color);
 		text-decoration: none;
-
 		&:hover {
 			opacity: 0.8;
 		}

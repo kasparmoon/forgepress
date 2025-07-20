@@ -1,7 +1,9 @@
 @use 'variables' as *;
 
 // Main navigation in the header
-.main-navigation {
+// General styles for both menus
+.main-navigation,
+.secondary-navigation {
 	ul {
 		list-style: none;
 		margin: 0;
@@ -20,6 +22,11 @@
 			color: var(--primary-accent-color);
 		}
 	}
+}
+
+// Specific styles for the top/secondary menu
+.secondary-navigation {
+	font-size: 0.85rem;
 }
 
 // Footer navigation

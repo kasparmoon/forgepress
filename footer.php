@@ -10,7 +10,7 @@
 	</div></div><footer id="colophon" class="site-footer">
 	<div class="footer-inner container">
 		<div class="site-info">
-			<p>&copy; <?php echo esc_html( date_i18n( 'Y' ) ); ?> <?php bloginfo( 'name' ); ?></p>
+			<p>Copyright &copy; <?php echo esc_html( date_i18n( 'Y' ) ); ?> <?php bloginfo( 'name' ); ?></p>
 		</div>
 
 		<nav class="footer-navigation">

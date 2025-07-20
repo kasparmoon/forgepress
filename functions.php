@@ -24,8 +24,9 @@ function forgepress_setup() {
 	add_theme_support( 'woocommerce' );
 	register_nav_menus(
 		array(
-			'primary' => esc_html__( 'Primary Menu', 'forgepress' ),
-			'footer'  => esc_html__( 'Footer Menu', 'forgepress' ),
+			'primary'   => esc_html__( 'Primary Menu', 'forgepress' ),
+			'secondary' => esc_html__( 'Secondary Menu (Header Top)', 'forgepress' ), // NEW
+			'footer'    => esc_html__( 'Footer Menu', 'forgepress' ),
 		)
 	);
 }

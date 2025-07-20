@@ -21,16 +21,25 @@
 
 <header id="masthead" class="site-header">
 	<div class="header-inner container">
+
 		<div class="site-branding">
+			<?php
+			// We will add a Site Logo option here in a future step.
+			// For now, it will display the site title.
+			?>
 			<h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
-		</div>
-
-		<nav id="site-navigation" class="main-navigation">
-			<?php wp_nav_menu( array( 'theme_location' => 'primary', 'menu_id' => 'primary-menu' ) ); ?>
-		</nav>
-
-		<div class="header-actions">
-			<div class="header-social-links">
+		</div><div class="header-top">
+			<nav id="secondary-navigation" class="secondary-navigation">
+				<?php
+				wp_nav_menu(
+					array(
+						'theme_location' => 'secondary',
+						'menu_id'        => 'secondary-menu',
+						'depth'          => 1,
+					)
+				);
+				?>
+			</nav><div class="header-social-links">
 				<?php
 				$social_networks = array( 'facebook', 'twitter', 'instagram', 'linkedin', 'youtube' );
 				foreach ( $social_networks as $network ) {
@@ -40,15 +49,22 @@
 					}
 				}
 				?>
-			</div>
-			<div class="header-search">
+			</div></div><div class="header-main">
+			<nav id="site-navigation" class="main-navigation">
+				<?php
+				wp_nav_menu(
+					array(
+						'theme_location' => 'primary',
+						'menu_id'        => 'primary-menu',
+					)
+				);
+				?>
+			</nav><div class="header-search">
 				<button class="search-toggle" aria-controls="search-modal" aria-expanded="false">
 					<?php echo forgepress_get_svg_icon( 'search' ); ?>
 					<span class="screen-reader-text"><?php esc_html_e( 'Search', 'forgepress' ); ?></span>
 				</button>
-			</div>
-		</div>
-	</div></header><div class="search-modal-container">
+			</div></div></div></header><div class="search-modal-container">
 	<div class="search-modal">
 		<?php get_search_form(); ?>
 	</div>
