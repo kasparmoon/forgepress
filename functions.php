@@ -104,6 +104,22 @@ function forgepress_add_module_to_script( $tag, $handle, $src ) {
 }
 add_filter( 'script_loader_tag', 'forgepress_add_module_to_script', 10, 3 );
 
+/**
+ * Enqueue scripts for the Customizer controls.
+ *
+ * @since 1.0.0
+ */
+function forgepress_customize_controls_js() {
+	// Get all the setting IDs we need to reset.
+	$setting_ids = array_keys( forgepress_get_all_setting_ids() );
+
+	wp_enqueue_script( 'forgepress-customizer-reset', get_template_directory_uri() . '/assets/js/customizer-reset.js', array( 'customize-controls' ), '1.0.0', true );
+
+	// Pass the setting IDs to our script.
+	wp_localize_script( 'forgepress-customizer-reset', 'forgepress_reset_data', array( 'setting_ids' => $setting_ids ) );
+}
+add_action( 'customize_controls_enqueue_scripts', 'forgepress_customize_controls_js' );
+
 
 // =============================================================================
 // 3. FILTERS AND ACTIONS
@@ -150,6 +166,33 @@ function forgepress_display_reading_time() {
 	echo '<span class="reading-time"><span class="dashicons dashicons-clock"></span>' . esc_html( $text ) . '</span>';
 }
 
+/**
+ * Gathers all theme setting IDs for the reset button.
+ *
+ * @return array
+ */
+function forgepress_get_all_setting_ids() {
+	$color_settings  = forgepress_get_color_settings();
+	$social_networks = array( 'facebook', 'twitter', 'instagram', 'linkedin', 'youtube' );
+
+	$ids = array(
+		'forgepress_site_layout',
+		'forgepress_sidebar_layout',
+		'forgepress_sidebar_show_on_blog',
+		'forgepress_sidebar_show_on_posts',
+		'forgepress_accent_color',
+	);
+
+	foreach ( $color_settings as $id => $setting ) {
+		$ids[] = 'forgepress_' . $id;
+	}
+
+	foreach ( $social_networks as $network ) {
+		$ids[] = 'forgepress_social_' . $network . '_link';
+	}
+
+	return array_flip( $ids ); // Use array_flip to make checking keys easier.
+}
 
 // =============================================================================
 // 5. INCLUDE ADDITIONAL FILES

@@ -106,6 +106,30 @@ function forgepress_customize_register( $wp_customize ) {
 		$wp_customize->add_setting( 'forgepress_social_' . $network . '_link', array( 'default' => '', 'sanitize_callback' => 'esc_url_raw' ) );
 		$wp_customize->add_control( 'forgepress_social_' . $network . '_link_control', array( 'label' => ucwords( $network ) . ' URL', 'section' => 'forgepress_social_links_section', 'type' => 'url', 'settings' => 'forgepress_social_' . $network . '_link' ) );
 	}
+
+	// --- Reset Section (NEW) ---
+	$wp_customize->add_section(
+		'forgepress_reset_section',
+		array(
+			'title'       => __( 'Reset Settings', 'forgepress' ),
+			'priority'    => 200, // Place it at the end.
+			'panel'       => 'forgepress_theme_options',
+		)
+	);
+
+	// Dummy setting for the reset button control.
+	$wp_customize->add_setting( 'forgepress_reset_button', array( 'sanitize_callback' => 'sanitize_text_field' ) );
+	$wp_customize->add_control(
+		'forgepress_reset_button_control',
+		array(
+			'label'       => __( 'Reset All Options', 'forgepress' ),
+			'description' => __( 'CAUTION: This will reset ALL ForgePress options in the Customizer to their default values. This action cannot be undone.', 'forgepress' ),
+			'section'     => 'forgepress_reset_section',
+			'settings'    => 'forgepress_reset_button',
+			'type'        => 'button', // This is just a placeholder type.
+		)
+	);
+
 }
 add_action( 'customize_register', 'forgepress_customize_register' );
 
