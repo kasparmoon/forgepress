@@ -92,44 +92,46 @@ function forgepress_customize_register( $wp_customize ) {
 	$wp_customize->add_setting( 'forgepress_accent_color', array( 'default' => '#0073aa', 'sanitize_callback' => 'sanitize_hex_color' ) );
 	$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'forgepress_accent_color_control', array( 'label' => __( 'Primary Accent Color (Links & Buttons)', 'forgepress' ), 'section' => 'forgepress_general_colors_section' ) ) );
 
-	// --- Social Links Section (NEW) ---
-	$wp_customize->add_section(
-		'forgepress_social_links_section',
-		array(
-			'title'       => __( 'Social Links', 'forgepress' ),
-			'description' => __( 'Enter the full URLs for your social media profiles.', 'forgepress' ),
-			'panel'       => 'forgepress_theme_options',
-		)
-	);
+	// --- Social Links Section ---
+	$wp_customize->add_section( 'forgepress_social_links_section', array( 'title' => __( 'Social Links', 'forgepress' ), 'description' => __( 'Enter the full URLs for your social media profiles.', 'forgepress' ), 'panel' => 'forgepress_theme_options' ) );
 	$social_networks = array( 'facebook', 'twitter', 'instagram', 'linkedin', 'youtube' );
 	foreach ( $social_networks as $network ) {
 		$wp_customize->add_setting( 'forgepress_social_' . $network . '_link', array( 'default' => '', 'sanitize_callback' => 'esc_url_raw' ) );
 		$wp_customize->add_control( 'forgepress_social_' . $network . '_link_control', array( 'label' => ucwords( $network ) . ' URL', 'section' => 'forgepress_social_links_section', 'type' => 'url', 'settings' => 'forgepress_social_' . $network . '_link' ) );
 	}
 
-	// --- Reset Section (NEW) ---
+	// --- Reset Section ---
 	$wp_customize->add_section(
 		'forgepress_reset_section',
 		array(
-			'title'       => __( 'Reset Settings', 'forgepress' ),
-			'priority'    => 200, // Place it at the end.
-			'panel'       => 'forgepress_theme_options',
+			'title'    => __( 'Reset Settings', 'forgepress' ),
+			'priority' => 200,
+			'panel'    => 'forgepress_theme_options',
 		)
 	);
 
-	// Dummy setting for the reset button control.
-	$wp_customize->add_setting( 'forgepress_reset_button', array( 'sanitize_callback' => 'sanitize_text_field' ) );
+	// This control now acts as a container for our button.
+	// The CSS we added in functions.php will hide the control itself,
+	// leaving only our button visible from the description.
+	$reset_nonce = wp_create_nonce( 'forgepress_reset_nonce' );
+	$reset_link  = add_query_arg(
+		array(
+			'action'   => 'forgepress_reset_customizer',
+			'_wpnonce' => $reset_nonce,
+		),
+		admin_url( 'admin-post.php' )
+	);
+
+	$wp_customize->add_setting( 'forgepress_reset_placeholder', array() );
 	$wp_customize->add_control(
-		'forgepress_reset_button_control',
+		'forgepress_reset_placeholder_control',
 		array(
 			'label'       => __( 'Reset All Options', 'forgepress' ),
-			'description' => __( 'CAUTION: This will reset ALL ForgePress options in the Customizer to their default values. This action cannot be undone.', 'forgepress' ),
+			'description' => '<p>' . __( 'CAUTION: This will reset ALL ForgePress options to their default values. This action cannot be undone.', 'forgepress' ) . '</p><a href="' . esc_url( $reset_link ) . '" class="button button-primary button-large" onclick="return confirm(\'Are you sure you want to reset all ForgePress options?\');">' . __( 'Reset All ForgePress Options', 'forgepress' ) . '</a>',
 			'section'     => 'forgepress_reset_section',
-			'settings'    => 'forgepress_reset_button',
-			'type'        => 'button', // This is just a placeholder type.
+			'settings'    => 'forgepress_reset_placeholder',
 		)
 	);
-
 }
 add_action( 'customize_register', 'forgepress_customize_register' );
 

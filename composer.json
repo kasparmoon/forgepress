@@ -1,0 +1,5 @@
+{
+    "require": {
+        "kirki-framework/kirki": "^4.2"
+    }
+}
