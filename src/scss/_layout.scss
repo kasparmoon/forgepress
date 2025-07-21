@@ -2,11 +2,11 @@
 
 // General body styles
 body {
-	background-color: var(--color-website-background-color);
-	color: var(--color-primary-text-color);
+	background-color: #f0f0f0;
+	color: $color-text-primary;
 }
 
-// Reusable container class to keep inner content aligned
+// Reusable container class
 .container {
 	width: 100%;
 	max-width: $content-width;
@@ -16,32 +16,25 @@ body {
 	padding-right: $spacing-unit;
 }
 
-// --- Layout variations ---
-.layout-full-width {
-	// In this mode, the .site container has no max-width
-	.site {
-		max-width: 100%;
-	}
+// Layout modifiers
+.layout-boxed .site {
+	max-width: $content-width;
+	margin: $spacing-unit auto;
+	background-color: var(--color-content-background-color);
+	padding: $spacing-unit * 2;
 }
 
-.layout-boxed {
-	// In this mode, the .site container gets a max-width and background
-	.site {
-		max-width: $content-width;
-		margin: $spacing-unit auto;
-		background-color: var(--color-content-background-color);
-		padding: $spacing-unit * 2;
-	}
+.layout-full-width .site {
+	max-width: 100%;
 }
 
-// --- Sidebar Layout Grid ---
+// Sidebar Layout Grid
 .site-content-grid {
 	display: grid;
 	grid-template-columns: repeat(12, 1fr);
 	grid-column-gap: $spacing-unit;
 }
 
-// Default state (no sidebar)
 #primary {
 	grid-column: 1 / -1;
 }
@@ -90,8 +83,9 @@ body {
 	grid-column: 10 / 13;
 }
 
-// --- Block Alignment Grid ---
-.site-main > * {
+// --- THIS IS THE FIX ---
+// Block Alignment Grid. This rule is now told NOT to run on the front page.
+body:not(.front-page) .site-main > * {
 	display: grid;
 	grid-template-columns: 1fr min($content-width, 100%) 1fr;
 
@@ -99,12 +93,14 @@ body {
 		grid-column: 2;
 	}
 }
+
 .alignwide {
 	grid-column: 1 / -1;
 	max-width: $content-width + 200px;
 	margin-left: auto;
 	margin-right: auto;
 }
+
 .alignfull {
 	grid-column: 1 / -1;
 	max-width: 100vw;
@@ -112,7 +108,7 @@ body {
 	width: 100vw;
 }
 
-// --- Styles for post listings ---
+// Styles for post listings
 .post {
 	padding-bottom: $spacing-unit;
 	margin-bottom: $spacing-unit;

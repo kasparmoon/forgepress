@@ -2,12 +2,8 @@
 
 // General styles for homepage sections
 .homepage-section {
-	//padding: $spacing-unit * 2 0;
-    align-self: auto;
-
-	&:not(.homepage-hero) {
-		border-bottom: 1px solid $color-border;
-	}
+	padding: $spacing-unit * 3 0;
+	border-bottom: 1px solid $color-border;
 }
 
 .section-title {
@@ -17,84 +13,41 @@
 	text-align: center;
 }
 
-// --- HERO SECTION (REVISED) ---
+.section-title-small {
+	font-size: 1.2rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: $spacing-unit;
+}
+
+// --- HERO SECTION ---
 .homepage-hero {
-	background-color: var(--color-primary-text-color);
-	color: #fff;
-	text-align: center;
-	padding: $spacing-unit * 2.1 0; // REVISED: Reduced vertical padding
-
-	.hero-title {
-		font-size: 2.8rem;
-		margin-top: $spacing-unit / 2;
-		margin-bottom: $spacing-unit;
-		color: #fff;
-	}
-
-	.hero-excerpt {
-		font-size: 1.1rem;
-		max-width: 650px;
-		margin: 0 auto $spacing-unit * 1.5;
-		opacity: 0.9;
-	}
+	background-color: $color-background-subtle;
+	padding: $spacing-unit * 4 0;
 }
 
-// --- HERO CTA BUTTON (REVISED) ---
-.hero-button {
-	// Inherits from our main .button style in _forms.scss
-	font-size: 1rem;
-	padding: $spacing-unit * 0.75 $spacing-unit * 2;
-	background-color: var(--primary-accent-color);
-	transition: transform 0.2s ease-in-out, background-color 0.2s ease-in-out;
-
-	&:hover {
-		background-color: #fff;
-		color: var(--primary-accent-color);
-		transform: scale(1.05);
-	}
-}
-
-
-// --- FEATURED POSTS GRID (REVISED) ---
-.featured-posts-grid {
+.hero-grid {
 	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-	gap: $spacing-unit * 1.5;
+	grid-template-columns: 1fr 1fr;
+	gap: $spacing-unit * 3;
+	align-items: center;
 }
 
-.featured-post-card {
-	border: 1px solid $color-border;
+.hero-title {
+	font-size: 3rem;
+	margin-top: 0;
+	margin-bottom: $spacing-unit;
+}
+
+.hero-excerpt {
+	font-size: 1.1rem;
+	margin-bottom: $spacing-unit * 1.5;
+}
+
+.hero-image img {
+	width: 100%;
+	height: auto;
 	border-radius: $border-radius;
-	overflow: hidden;
-	transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-
-	&:hover {
-		transform: translateY(-5px); // Adds a "lift" effect
-		box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); // Adds a shadow
-	}
-
-	img {
-		display: block;
-		width: 100%;
-		height: auto;
-		aspect-ratio: 16 / 9;
-		object-fit: cover;
-	}
-
-	.card-content {
-		padding: $spacing-unit;
-	}
-
-	.card-meta {
-		font-size: 0.75rem;
-		text-transform: uppercase;
-		color: $color-text-secondary;
-	}
-
-	.card-title {
-		font-size: 1.1rem;
-		margin: $spacing-unit / 4 0 0;
-	}
 }
 
 // --- BLOG ARCHIVE SECTION ---
@@ -105,15 +58,6 @@
 }
 
 .blog-post-item {
-	border-bottom: 1px solid $color-border;
-	padding-bottom: $spacing-unit;
-	margin-bottom: $spacing-unit;
-	&:last-child,
-	&:nth-last-child(2) {
-		border-bottom: none;
-		margin-bottom: 0;
-	}
-
 	.card-title {
 		font-size: 1.5rem;
 		margin: 0 0 $spacing-unit / 2;
@@ -130,6 +74,5 @@
 .about-grid {
 	display: grid;
 	grid-template-columns: 1fr 1fr;
-	gap: $spacing-unit * 3;
-	text-align: left;
+	gap: $spacing-unit * 2;
 }
