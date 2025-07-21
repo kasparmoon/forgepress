@@ -62,20 +62,14 @@ get_header(); ?>
 				<h3 class="section-title">Latest From The Blog</h3>
 				<div class="blog-archive-grid">
 					<div class="blog-post-item">
-						<div class="post-item-content">
-							<span class="card-meta">Category</span>
-							<h4 class="card-title">How to Grow Your Audience with Strategic Content</h4>
-							<p class="post-item-excerpt">An engaging excerpt goes here, providing a glimpse into the article and encouraging readers to learn more...</p>
-							<span class="post-item-meta">July 21, 2025 · 5 min read</span>
-						</div>
+						<h4 class="card-title">How to Grow Your Audience with Strategic Content</h4>
+						<p class="post-item-excerpt">An engaging excerpt goes here, providing a glimpse into the article and encouraging readers to learn more...</p>
+						<span class="post-item-meta">July 21, 2025 · 5 min read</span>
 					</div>
 					<div class="blog-post-item">
-						<div class="post-item-content">
-							<span class="card-meta">Category</span>
-							<h4 class="card-title">The Art of Storytelling in Digital Marketing</h4>
-							<p class="post-item-excerpt">An engaging excerpt goes here, providing a glimpse into the article and encouraging readers to learn more...</p>
-							<span class="post-item-meta">July 20, 2025 · 7 min read</span>
-						</div>
+						<h4 class="card-title">The Art of Storytelling in Digital Marketing</h4>
+						<p class="post-item-excerpt">An engaging excerpt goes here, providing a glimpse into the article and encouraging readers to learn more...</p>
+						<span class="post-item-meta">July 20, 2025 · 7 min read</span>
 					</div>
 				</div>
 			</div>
@@ -87,11 +81,11 @@ get_header(); ?>
 				<div class="about-grid">
 					<div class="about-card">
 						<h4 class="section-title">Why This Blog?</h4>
-						<p>This is a placeholder description explaining the mission and purpose of the blog. It connects with the target audience and tells them what kind of value they can expect to find here.</p>
+						<p>This is a placeholder description explaining the mission and purpose of the blog.</p>
 					</div>
 					<div class="about-card">
 						<h4 class="section-title">About The Blogger</h4>
-						<p>A short, personal bio of the author. This is where you build a personal connection with your readers by sharing a bit about your journey, your expertise, and your passion for the subject matter.</p>
+						<p>A short, personal bio of the author goes here to build a personal connection.</p>
 					</div>
 				</div>
 			</div>
