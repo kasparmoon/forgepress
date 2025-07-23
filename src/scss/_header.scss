@@ -1,10 +1,10 @@
 @use 'variables' as *;
 
 .site-header {
-	padding: $spacing-unit 0;
 	background-color: var(--color-header-background-color);
 	border-bottom: 1px solid $color-border;
 }
+
 
 .header-inner {
 	display: grid;

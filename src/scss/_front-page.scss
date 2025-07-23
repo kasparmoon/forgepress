@@ -3,12 +3,18 @@
 // General styles for homepage sections
 .homepage-section {
 	padding: $spacing-unit * 2;
-	border: 1px solid $color-border;
-	border-radius: $border-radius;
 	margin-bottom: $spacing-unit * 2;
 
-	&:last-child {
-		margin-bottom: 0;
+	// In Boxed mode, all sections have a consistent background.
+	.layout-boxed & {
+		background-color: $color-background-subtle;
+		border-radius: $border-radius;
+	}
+
+	// In Full-Width mode, only the hero has a distinct background.
+	.layout-full-width &.homepage-hero {
+		background-color: var(--color-content-background-color);
+		border: 1px solid $color-border;
 	}
 }
 

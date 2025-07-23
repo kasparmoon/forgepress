@@ -21,12 +21,7 @@
 
 <header id="masthead" class="site-header">
 	<div class="header-inner container">
-
 		<div class="site-branding">
-			<?php
-			// We will add a Site Logo option here in a future step.
-			// For now, it will display the site title.
-			?>
 			<h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
 		</div><div class="header-top">
 			<nav id="secondary-navigation" class="secondary-navigation">
@@ -36,6 +31,7 @@
 						'theme_location' => 'secondary',
 						'menu_id'        => 'secondary-menu',
 						'depth'          => 1,
+						'fallback_cb'    => false, // Don't show anything if no menu is assigned
 					)
 				);
 				?>
@@ -56,6 +52,7 @@
 					array(
 						'theme_location' => 'primary',
 						'menu_id'        => 'primary-menu',
+						'fallback_cb'    => 'forgepress_nav_menu_fallback',
 					)
 				);
 				?>

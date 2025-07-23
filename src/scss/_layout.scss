@@ -1,17 +1,8 @@
 @use 'variables' as *;
 
 // --- Universal Box Sizing Reset ---
-// This is a modern CSS best practice that prevents padding and borders
-// from affecting an element's final width, fixing alignment issues.
-html {
-	box-sizing: border-box;
-}
-*,
-*::before,
-*::after {
-	box-sizing: inherit;
-}
-
+html { box-sizing: border-box; }
+*, *::before, *::after { box-sizing: inherit; }
 
 // --- General Body Styles ---
 body {
@@ -19,12 +10,15 @@ body {
 	color: var(--color-primary-text-color);
 }
 
+// --- Main Site Wrapper (#page.site) ---
+// This now ONLY wraps the main content and sidebars.
 
-// --- Main Site Wrappers & Containers ---
 .site {
-	// This is the main page wrapper, full-width by default.
+	// The container class will be added to this element in our templates.
 }
 
+// --- Reusable Container Class ---
+// Used inside the full-width header/footer to align their content.
 .container {
 	width: 100%;
 	max-width: $content-width;
@@ -34,20 +28,26 @@ body {
 	padding-right: $spacing-unit * 1.5;
 }
 
-
 // --- Global Layout Modifiers ---
-.layout-boxed .site {
-	// In Boxed mode, we put a larger max-width on the page wrapper
-	// and center it to create the "boxed" effect.
-	max-width: 1320px;
-	margin-top: $spacing-unit * 2;
-	margin-bottom: $spacing-unit * 2;
-	margin-left: auto;
-	margin-right: auto;
-	background-color: var(--color-content-background-color);
-	box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
-}
+.layout-boxed {
+	// In Boxed mode, the header, content, and footer are all contained.
+	.site-header,
+	.site-footer,
+	.site {
+		max-width: 1240px; // A generous width for the "box".
+		margin-left: auto;
+		margin-right: auto;
+	}
 
+	.site {
+		margin-top: $spacing-unit;
+		margin-bottom: $spacing-unit;
+		padding: $spacing-unit * 2;
+		background-color: var(--color-content-background-color);
+		border: 1px solid $color-border;
+	}
+}
+// Note: .layout-full-width requires no special rules here, as it's the default behavior.
 
 // --- Sidebar Layout System (using Flexbox) ---
 .site-content-grid {
