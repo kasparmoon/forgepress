@@ -11,61 +11,108 @@
 
 get_header(); ?>
 
-<div id="primary" class="content-area container">
+<div id="primary" class="content-area">
 	<main id="main" class="site-main">
 
-		<?php // --- HERO SECTION --- ?>
-		<section class="homepage-section homepage-hero">
-			<div class="hero-grid">
-				<div class="hero-content">
-					<h2 class="hero-title">A Powerful Headline Grabs the Reader's Attention</h2>
-					<p class="hero-excerpt">This is a short, compelling excerpt from the featured article, designed to make the visitor want to click through and read more.</p>
-					<a href="#" class="button hero-button">Read The Article</a>
-				</div>
-				<div class="hero-image">
-					<img src="https://picsum.photos/seed/heroside/800/600" alt="Placeholder Image for Hero Section">
-				</div>
-			</div>
-		</section>
+		<?php
+		// --- HERO SECTION ---
+		// For now, this will query the very latest post.
+		// In a future step, we can add a Customizer option to select a specific featured post.
+		$hero_query = new WP_Query(
+			array(
+				'posts_per_page'      => 1,
+				'ignore_sticky_posts' => true,
+			)
+		);
+		if ( $hero_query->have_posts() ) :
+			while ( $hero_query->have_posts() ) :
+				$hero_query->the_post();
+				?>
+				<section class="homepage-section homepage-hero">
+					<div class="container hero-grid">
+						<div class="hero-content">
+							<h2 class="hero-title"><?php the_title(); ?></h2>
+							<div class="hero-excerpt">
+								<?php the_excerpt(); ?>
+							</div>
+							<a href="<?php the_permalink(); ?>" class="button hero-button"><?php esc_html_e( 'Read The Article', 'forgepress' ); ?></a>
+						</div>
+						<div class="hero-image">
+							<?php if ( has_post_thumbnail() ) : ?>
+								<?php the_post_thumbnail( 'large' ); ?>
+							<?php else : ?>
+								<img src="https://picsum.photos/seed/heroside/800/600" alt="Placeholder Image for Hero Section">
+							<?php endif; ?>
+						</div>
+					</div>
+				</section>
+				<?php
+			endwhile;
+			wp_reset_postdata();
+		endif;
+		?>
 
-		<?php // --- BLOG ARCHIVE SECTION --- ?>
-		<section class="homepage-section homepage-blog-archive">
-			<h3 class="section-title">Latest Posts</h3>
-			<div class="featured-posts-grid">
-				<div class="featured-post-card">
-					<img src="https://picsum.photos/seed/post4/600/400" alt="Placeholder Image 4">
-					<div class="card-content">
-						<span class="card-meta">Category</span>
-						<h4 class="card-title">How to Grow Your Audience with Strategic Content</h4>
+
+		<?php
+		// --- LATEST POSTS SECTION ---
+		// Query the next 3 latest posts, skipping the one we already showed in the hero.
+		$latest_posts_query = new WP_Query(
+			array(
+				'posts_per_page' => 3,
+				'offset'         => 1, // Skip the first post.
+				'ignore_sticky_posts' => true,
+			)
+		);
+		if ( $latest_posts_query->have_posts() ) :
+			?>
+			<section class="homepage-section homepage-blog-archive">
+				<div class="container">
+					<h3 class="section-title"><?php esc_html_e( 'Latest Posts', 'forgepress' ); ?></h3>
+					<div class="featured-posts-grid">
+						<?php
+						while ( $latest_posts_query->have_posts() ) :
+							$latest_posts_query->the_post();
+							?>
+							<div class="featured-post-card">
+								<?php if ( has_post_thumbnail() ) : ?>
+									<a href="<?php the_permalink(); ?>"><?php the_post_thumbnail( 'medium_large' ); ?></a>
+								<?php else : ?>
+									<a href="<?php the_permalink(); ?>"><img src="https://picsum.photos/seed/<?php echo esc_attr( get_the_ID() ); ?>/600/400" alt="Placeholder Image"></a>
+								<?php endif; ?>
+								<div class="card-content">
+									<div class="card-meta">
+										<?php
+										$categories = get_the_category();
+										if ( ! empty( $categories ) ) {
+											echo '<a href="' . esc_url( get_category_link( $categories[0]->term_id ) ) . '">' . esc_html( $categories[0]->name ) . '</a>';
+										}
+										?>
+									</div>
+									<h4 class="card-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h4>
+								</div>
+							</div>
+							<?php
+						endwhile;
+						wp_reset_postdata();
+						?>
 					</div>
 				</div>
-				<div class="featured-post-card">
-					<img src="https://picsum.photos/seed/post5/600/400" alt="Placeholder Image 5">
-					<div class="card-content">
-						<span class="card-meta">Category</span>
-						<h4 class="card-title">The Art of Storytelling in Digital Marketing</h4>
-					</div>
-				</div>
-				<div class="featured-post-card">
-					<img src="https://picsum.photos/seed/post6/600/400" alt="Placeholder Image 6">
-					<div class="card-content">
-						<span class="card-meta">Category</span>
-						<h4 class="card-title">A Third Post to Complete the Row of Three</h4>
-					</div>
-				</div>
-			</div>
-		</section>
+			</section>
+			<?php
+		endif;
+		?>
+
 
 		<?php // --- ABOUT SECTIONS --- ?>
 		<section class="homepage-section homepage-about-sections">
-			<div class="about-grid">
+			<div class="container about-grid">
 				<div class="about-card">
-					<h4 class="section-title-small">Why This Blog</h4>
-					<p>This is a placeholder description explaining the mission and purpose of the blog.</p>
+					<h4 class="section-title-small"><?php esc_html_e( 'Why This Blog', 'forgepress' ); ?></h4>
+					<p><?php esc_html_e( 'This is a placeholder description explaining the mission and purpose of the blog. A user can edit this by creating a page with the slug "why-this-blog".', 'forgepress' ); ?></p>
 				</div>
 				<div class="about-card">
-					<h4 class="section-title-small">Short About Section</h4>
-					<p>A short, personal bio of the author goes here to build a personal connection.</p>
+					<h4 class="section-title-small"><?php esc_html_e( 'Short About Section', 'forgepress' ); ?></h4>
+					<p><?php esc_html_e( 'A short, personal bio of the author. A user can edit this by going to their profile page in the WordPress admin.', 'forgepress' ); ?></p>
 				</div>
 			</div>
 		</section>

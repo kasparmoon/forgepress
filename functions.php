@@ -141,6 +141,25 @@ function forgepress_handle_customizer_reset() {
 add_action( 'admin_post_nopriv_forgepress_reset_customizer', 'forgepress_handle_customizer_reset' );
 add_action( 'admin_post_forgepress_reset_customizer', 'forgepress_handle_customizer_reset' );
 
+/**
+ * Provides a fallback for wp_nav_menu() when no menu is assigned.
+ *
+ * @param array $args Arguments for wp_nav_menu.
+ * @return array
+ */
+function forgepress_nav_menu_fallback( $args ) {
+	if ( ! current_user_can( 'edit_theme_options' ) ) {
+		return null;
+	}
+	$menu_html = '<ul id="%1$s" class="%2$s">';
+	$menu_html .= '<li><a href="' . esc_url( admin_url( 'nav-menus.php' ) ) . '">' . esc_html__( 'Assign a menu', 'forgepress' ) . '</a></li>';
+	$menu_html .= '</ul>';
+	$args['echo'] = true;
+	// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+	printf( $menu_html, esc_attr( $args['menu_id'] ), esc_attr( $args['menu_class'] ) );
+	return false;
+}
+
 // =============================================================================
 // 6. HELPER FUNCTIONS
 // =============================================================================
