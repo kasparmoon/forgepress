@@ -143,21 +143,43 @@ add_action( 'admin_post_forgepress_reset_customizer', 'forgepress_handle_customi
 
 /**
  * Provides a fallback for wp_nav_menu() when no menu is assigned.
+ * Displays a list of pages, or an "Add a Menu" link for admins if no pages exist.
  *
  * @param array $args Arguments for wp_nav_menu.
- * @return array
  */
 function forgepress_nav_menu_fallback( $args ) {
+	// Get the pages to display.
+	$pages = get_pages(
+		array(
+			'sort_column' => 'menu_order, post_title',
+		)
+	);
+
+	// If pages exist, display them in a list.
+	if ( $pages ) {
+		$menu_html  = '<ul id="%1$s" class="%2$s">';
+		$menu_html .= wp_list_pages(
+			array(
+				'title_li' => '',
+				'echo'     => 0,
+			)
+		);
+		$menu_html .= '</ul>';
+
+		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+		printf( $menu_html, esc_attr( $args['menu_id'] ), esc_attr( $args['menu_class'] ) );
+		return;
+	}
+
+	// If no pages exist and user can edit, show the "Add a menu" link.
 	if ( ! current_user_can( 'edit_theme_options' ) ) {
-		return null;
+		return;
 	}
 	$menu_html = '<ul id="%1$s" class="%2$s">';
 	$menu_html .= '<li><a href="' . esc_url( admin_url( 'nav-menus.php' ) ) . '">' . esc_html__( 'Assign a menu', 'forgepress' ) . '</a></li>';
 	$menu_html .= '</ul>';
-	$args['echo'] = true;
 	// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	printf( $menu_html, esc_attr( $args['menu_id'] ), esc_attr( $args['menu_class'] ) );
-	return false;
 }
 
 // =============================================================================
