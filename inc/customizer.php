@@ -100,6 +100,54 @@ function forgepress_customize_register( $wp_customize ) {
 		$wp_customize->add_control( 'forgepress_social_' . $network . '_link_control', array( 'label' => ucwords( $network ) . ' URL', 'section' => 'forgepress_social_links_section', 'type' => 'url', 'settings' => 'forgepress_social_' . $network . '_link' ) );
 	}
 
+	// --- Homepage Content Section (NEW) ---
+	$wp_customize->add_section(
+		'forgepress_homepage_content_section',
+		array(
+			'title'    => __( 'Homepage Content', 'forgepress' ),
+			'priority' => 25, // Place it after Layout sections.
+			'panel'    => 'forgepress_theme_options',
+		)
+	);
+
+	// "Why This Blog" Setting & Control
+	$wp_customize->add_setting(
+		'forgepress_homepage_why_text',
+		array(
+			'default'           => 'This is a placeholder description explaining the mission and purpose of the blog. It connects with the target audience and tells them what kind of value they can expect to find here.',
+			'sanitize_callback' => 'wp_kses_post',
+		)
+	);
+	$wp_customize->add_control(
+		'forgepress_homepage_why_text_control',
+		array(
+			'label'    => __( '"Why This Blog" Content', 'forgepress' ),
+			'section'  => 'forgepress_homepage_content_section',
+			'settings' => 'forgepress_homepage_why_text',
+			'type'     => 'textarea',
+		)
+	);
+
+	// "Short About Section" Setting & Control
+	$wp_customize->add_setting(
+		'forgepress_homepage_about_text',
+		array(
+			'default'           => 'A short, personal bio of the author. This is where you build a personal connection with your readers by sharing a bit about your journey, your expertise, and your passion for the subject matter.',
+			'sanitize_callback' => 'wp_kses_post',
+		)
+	);
+	$wp_customize->add_control(
+		'forgepress_homepage_about_text_control',
+		array(
+			'label'    => __( '"Short About Section" Content', 'forgepress' ),
+			'section'  => 'forgepress_homepage_content_section',
+			'settings' => 'forgepress_homepage_about_text',
+			'type'     => 'textarea',
+		)
+	);
+
+	// --- End Homepage Content Section ---
+
 	// --- Reset Section ---
 	$wp_customize->add_section(
 		'forgepress_reset_section',
