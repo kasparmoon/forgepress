@@ -1,8 +1,14 @@
 @use 'variables' as *;
 
 // --- Universal Box Sizing Reset ---
-html { box-sizing: border-box; }
-*, *::before, *::after { box-sizing: inherit; }
+html {
+	box-sizing: border-box;
+}
+*,
+*::before,
+*::after {
+	box-sizing: inherit;
+}
 
 // --- General Body Styles ---
 body {
@@ -10,15 +16,11 @@ body {
 	color: var(--color-primary-text-color);
 }
 
-// --- Main Site Wrapper (#page.site) ---
-// This now ONLY wraps the main content and sidebars.
-
+// --- Main Site Wrapper & Reusable Container ---
 .site {
-	// The container class will be added to this element in our templates.
+	// This is the main page wrapper, full-width by default.
 }
 
-// --- Reusable Container Class ---
-// Used inside the full-width header/footer to align their content.
 .container {
 	width: 100%;
 	max-width: $content-width;
@@ -29,25 +31,17 @@ body {
 }
 
 // --- Global Layout Modifiers ---
-.layout-boxed {
-	// In Boxed mode, the header, content, and footer are all contained.
-	.site-header,
-	.site-footer,
-	.site {
-		max-width: 1240px; // A generous width for the "box".
-		margin-left: auto;
-		margin-right: auto;
-	}
-
-	.site {
-		margin-top: $spacing-unit;
-		margin-bottom: $spacing-unit;
-		padding: $spacing-unit * 2;
-		background-color: var(--color-content-background-color);
-		border: 1px solid $color-border;
-	}
+.layout-boxed .site {
+	// In Boxed mode, the main container gets a border, background, and max-width.
+	max-width: 1240px;
+	margin-top: $spacing-unit * 2;
+	margin-bottom: $spacing-unit * 2;
+	margin-left: auto;
+	margin-right: auto;
+	background-color: var(--color-content-background-color);
+	border: 1px solid $color-border;
+	padding: $spacing-unit;
 }
-// Note: .layout-full-width requires no special rules here, as it's the default behavior.
 
 // --- Sidebar Layout System (using Flexbox) ---
 .site-content-grid {
@@ -58,16 +52,15 @@ body {
 
 #primary {
 	flex-grow: 1;
-	min-width: 0; // Prevents content from overflowing its container
+	min-width: 0;
 }
 
 #secondary,
 #tertiary {
-	flex-shrink: 0; // Prevent sidebars from shrinking
-	display: none; // Hide sidebars by default
+	flex-shrink: 0;
+	display: none;
 }
 
-// Conditionally show and size sidebars based on body class
 .layout-sidebar-right {
 	#primary { width: calc(75% - ($spacing-unit * 1)); }
 	#secondary { width: calc(25% - ($spacing-unit * 1)); display: block; }
@@ -92,26 +85,21 @@ body {
 	#tertiary { width: calc(25% - ($spacing-unit * 1)); display: block; }
 }
 
-
 // --- Block Alignment Grid (for single posts/pages) ---
-// This ensures blocks inside content are centered but can break out.
-.entry-content {
-	> * {
-		max-width: $content-width;
-		margin-left: auto;
-		margin-right: auto;
-	}
-
-	> .alignwide {
-		max-width: $content-width + 200px;
-	}
-
-	> .alignfull {
-		max-width: none;
-		width: 100%;
-	}
+body:not(.front-page) .entry-content > * {
+	max-width: $content-width;
+	margin-left: auto;
+	margin-right: auto;
 }
 
+body:not(.front-page) .entry-content > .alignwide {
+	max-width: $content-width + 200px;
+}
+
+body:not(.front-page) .entry-content > .alignfull {
+	max-width: none;
+	width: 100%;
+}
 
 // --- Styles for post listings ---
 .post {

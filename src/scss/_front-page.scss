@@ -2,8 +2,8 @@
 
 // General styles for homepage sections
 .homepage-section {
-	padding: $spacing-unit * 3 0;
-	border-bottom: 1px solid $color-border;
+	padding: $spacing-unit * 2 0;
+	// All borders and backgrounds are removed from here.
 }
 
 .section-title {
@@ -21,13 +21,6 @@
 }
 
 // --- HERO SECTION ---
-.homepage-hero {
-	background-color: $color-background;
-	padding: $spacing-unit * 2;
-	border-radius: $border-radius;
-	border: 1px solid $color-border;
-}
-
 .hero-grid {
 	display: grid;
 	grid-template-columns: 1fr 1fr;
@@ -53,9 +46,9 @@
 }
 
 // --- BLOG ARCHIVE / LATEST POSTS SECTION ---
-.homepage-blog-archive {
-	background-color: $color-background-subtle;
-	padding-bottom: $spacing-unit * 4; // Add extra padding for the card effect
+// Add a subtle top border to visually separate sections in Full-Width mode
+.layout-full-width .homepage-blog-archive {
+	border-top: 1px solid $color-border;
 }
 
 .featured-posts-grid {
@@ -64,34 +57,16 @@
 	gap: $spacing-unit * 1.5;
 }
 
-
-// --- REVISED: "Torn Paper" Card Styles ---
 .featured-post-card {
-	background-color: $color-background;
+	// Borders and backgrounds removed for a seamless look.
+	// The torn paper effect is also removed for this cleaner implementation.
+	// We can revisit creative effects in the next step.
 	overflow: hidden;
 	transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-	position: relative; // Needed for the pseudo-element
-	padding-bottom: 30px; // Make space for the tear effect at the bottom
-	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
 
 	&:hover {
 		transform: translateY(-5px);
-		box-shadow: 0 10px 20px -3px rgba(0, 0, 0, 0.1), 0 4px 8px -2px rgba(0, 0, 0, 0.06);
-	}
-
-	// The "Torn Paper" Effect
-	&::after {
-		content: '';
-		position: absolute;
-		bottom: 0;
-		left: 0;
-		right: 0;
-		height: 30px;
-		// This uses multiple gradients to create a jagged, serrated pattern
-		background-image: linear-gradient(135deg, $color-background 25%, transparent 25%),
-			linear-gradient(225deg, $color-background 25%, transparent 25%);
-		background-size: 40px 40px;
-		background-position: -5px 0; // Offset for a better look
+		box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
 	}
 
 	img {
@@ -100,13 +75,11 @@
 		height: auto;
 		aspect-ratio: 16 / 9;
 		object-fit: cover;
+		border-radius: $border-radius; // Add radius to the image
 	}
 
 	.card-content {
-		padding: $spacing-unit;
-		position: relative; // Ensure content is on top of the tear effect
-		z-index: 2;
-		background-color: $color-background; // Match the paper color
+		padding: $spacing-unit 0;
 	}
 
 	.card-meta {
@@ -123,8 +96,9 @@
 
 
 // --- ABOUT SECTIONS ---
-.homepage-about-sections {
-	background-color: $color-background-subtle;
+// Add a subtle top border to visually separate sections in Full-Width mode
+.layout-full-width .homepage-about-sections {
+	border-top: 1px solid $color-border;
 }
 
 .about-grid {
@@ -133,24 +107,6 @@
 	gap: $spacing-unit * 2;
 }
 
-// Applying the torn paper effect to the about cards as well
 .about-card {
-	background-color: $color-background;
-	position: relative;
-	padding: $spacing-unit;
-	padding-bottom: 30px;
-	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-
-	&::after {
-		content: '';
-		position: absolute;
-		bottom: 0;
-		left: 0;
-		right: 0;
-		height: 30px;
-		background-image: linear-gradient(135deg, $color-background 25%, transparent 25%),
-			linear-gradient(225deg, $color-background 25%, transparent 25%);
-		background-size: 40px 40px;
-		background-position: -5px 0;
-	}
+	// All borders and backgrounds removed.
 }
