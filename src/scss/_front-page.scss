@@ -2,8 +2,12 @@
 
 // General styles for homepage sections
 .homepage-section {
-	padding: $spacing-unit * 2 0;
-	// All borders and backgrounds are removed from here.
+	padding: $spacing-unit * 3 0;
+	border-bottom: 1px solid $color-border;
+
+	&:last-child {
+		border-bottom: none;
+	}
 }
 
 .section-title {
@@ -21,6 +25,10 @@
 }
 
 // --- HERO SECTION ---
+.homepage-hero {
+	background-color: $color-background-subtle;
+}
+
 .hero-grid {
 	display: grid;
 	grid-template-columns: 1fr 1fr;
@@ -45,102 +53,29 @@
 	border-radius: $border-radius;
 }
 
-// --- BLOG ARCHIVE / LATEST POSTS SECTION ---
-.layout-full-width .homepage-blog-archive {
-	border-top: 1px solid $color-border;
-}
-
-.featured-posts-grid {
-	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-	gap: $spacing-unit * 1.5;
-}
-
-// --- REVISED: "Torn Paper" Card Styles ---
-.featured-post-card {
-	background-color: $color-background;
-	transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-	position: relative;
-	padding-bottom: 30px; // Make space for the tear effect at the bottom
-	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-
-	&:hover {
-		transform: translateY(-5px);
-		box-shadow: 0 10px 20px -3px rgba(0, 0, 0, 0.1), 0 4px 8px -2px rgba(0, 0, 0, 0.06);
-	}
-
-	// The "Torn Paper" Effect
-	&::after {
-		content: '';
-		position: absolute;
-		bottom: 0;
-		left: 0;
-		right: 0;
-		height: 30px;
-		// This uses multiple gradients to create a jagged, serrated pattern
-		background-image: linear-gradient(135deg, $color-background 25%, transparent 25%),
-			linear-gradient(225deg, $color-background 25%, transparent 25%);
-		background-size: 40px 40px;
-		background-position: -5px 0; // Offset for a better look
-	}
-
-	img {
-		display: block;
-		width: 100%;
-		height: auto;
-		aspect-ratio: 16 / 9;
-		object-fit: cover;
-	}
-
-	.card-content {
-		padding: $spacing-unit;
-		position: relative; // Ensure content is on top of the tear effect
-		z-index: 2;
-		background-color: $color-background; // Match the paper color
-	}
-
-	.card-meta {
-		font-size: 0.75rem;
-		text-transform: uppercase;
-		color: $color-text-secondary;
-	}
-
-	.card-title {
-		font-size: 1.1rem;
-		margin: $spacing-unit / 4 0 0;
-	}
-}
-
-
-// --- ABOUT SECTIONS ---
-.layout-full-width .homepage-about-sections {
-	border-top: 1px solid $color-border;
-}
-
-.about-grid {
+// --- BLOG ARCHIVE SECTION ---
+.blog-archive-grid {
 	display: grid;
 	grid-template-columns: 1fr 1fr;
 	gap: $spacing-unit * 2;
 }
 
-.about-card {
-	background-color: $color-background;
-	position: relative;
-	padding: $spacing-unit;
-	padding-bottom: 30px; // Make space for the tear effect
-	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-
-	// The "Torn Paper" Effect
-	&::after {
-		content: '';
-		position: absolute;
-		bottom: 0;
-		left: 0;
-		right: 0;
-		height: 30px;
-		background-image: linear-gradient(135deg, $color-background 25%, transparent 25%),
-			linear-gradient(225deg, $color-background 25%, transparent 25%);
-		background-size: 40px 40px;
-		background-position: -5px 0;
+.blog-post-item {
+	.card-title {
+		font-size: 1.5rem;
+		margin: 0 0 $spacing-unit / 2;
 	}
+	.post-item-meta {
+		font-size: 0.8rem;
+		color: $color-text-secondary;
+		margin-top: $spacing-unit;
+		display: block;
+	}
+}
+
+// --- ABOUT SECTIONS ---
+.about-grid {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: $spacing-unit * 2;
 }
