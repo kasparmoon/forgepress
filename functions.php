@@ -37,17 +37,20 @@ define( 'FORGEPRESS_PROD_PATH', get_template_directory() . '/dist' );
 // 3. THEME SETUP HOOKS
 // =============================================================================
 function forgepress_setup() {
+	// Let WordPress manage the document title.
+	add_theme_support( 'title-tag' ); // THIS IS THE NEW LINE
+
 	add_theme_support( 'widgets-block-editor' );
 	add_theme_support( 'post-thumbnails' );
 	add_theme_support( 'align-wide' );
 	add_theme_support( 'woocommerce' );
 
-	// THIS IS THE NEW CODE: Enable support for Custom Logo.
+	// Enable support for Custom Logo.
 	add_theme_support(
 		'custom-logo',
 		array(
-			'height'      => 50,
-			'width'       => 150,
+			'height'      => 100,
+			'width'       => 400,
 			'flex-height' => true,
 			'flex-width'  => true,
 		)

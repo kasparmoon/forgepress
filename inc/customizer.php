@@ -185,6 +185,17 @@ function forgepress_customize_register( $wp_customize ) {
 }
 add_action( 'customize_register', 'forgepress_customize_register' );
 
+/**
+ * Adds a description to the core Site Logo control.
+ *
+ * @param WP_Customize_Manager $wp_customize The Customizer object.
+ */
+function forgepress_customize_logo_description( $wp_customize ) {
+	$wp_customize->get_control( 'custom_logo' )->description = __( 'Recommended size: 250px by 80px. The logo will be scaled to fit the header.', 'forgepress' );
+}
+add_action( 'customize_register', 'forgepress_customize_logo_description', 20 );
+// End of Site Logo description
+
 function forgepress_generate_customizer_css() {
 	?>
 	<style type="text/css" id="forgepress-customizer-css">
