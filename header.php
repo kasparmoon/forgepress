@@ -21,8 +21,12 @@
 
 <header id="masthead" class="site-header">
 	<div class="header-inner container">
+
 		<div class="site-branding">
-			<h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
+			<?php
+			// THIS IS THE CHANGE: Display the custom logo or the site title.
+			the_custom_logo();
+			?>
 		</div><div class="header-top">
 			<nav id="secondary-navigation" class="secondary-navigation">
 				<?php
@@ -31,7 +35,7 @@
 						'theme_location' => 'secondary',
 						'menu_id'        => 'secondary-menu',
 						'depth'          => 1,
-						'fallback_cb'    => false, // Don't show anything if no menu is assigned
+						'fallback_cb'    => false,
 					)
 				);
 				?>
