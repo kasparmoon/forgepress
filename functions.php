@@ -57,7 +57,7 @@ function forgepress_setup() {
 		'custom-logo',
 		array(
 			'height'      => 100,
-			'width'       => 400,
+			'width'       => 270,
 			'flex-height' => true,
 			'flex-width'  => true,
 		)
