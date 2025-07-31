@@ -38,11 +38,18 @@ define( 'FORGEPRESS_PROD_PATH', get_template_directory() . '/dist' );
 // =============================================================================
 function forgepress_setup() {
 	// Let WordPress manage the document title.
-	add_theme_support( 'title-tag' ); // THIS IS THE NEW LINE
+	add_theme_support( 'title-tag' );
 
+	// Add support for block-based widgets.
 	add_theme_support( 'widgets-block-editor' );
+
+	// Enable support for Post Thumbnails on posts and pages.
 	add_theme_support( 'post-thumbnails' );
+
+	// Enable support for wide and full-width block alignments.
 	add_theme_support( 'align-wide' );
+
+	// Enable basic support for WooCommerce.
 	add_theme_support( 'woocommerce' );
 
 	// Enable support for Custom Logo.
@@ -56,6 +63,15 @@ function forgepress_setup() {
 		)
 	);
 
+	// THIS IS THE FIX: Enable support for header text. This brings back the display checkbox.
+	add_theme_support(
+		'custom-header',
+		array(
+			'header-text' => array( 'site-title', 'site-description' ),
+		)
+	);
+
+	// Register navigation menus.
 	register_nav_menus(
 		array(
 			'primary'   => esc_html__( 'Primary Menu', 'forgepress' ),
