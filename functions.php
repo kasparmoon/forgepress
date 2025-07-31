@@ -111,22 +111,31 @@ function forgepress_add_module_to_script( $tag, $handle, $src ) {
 }
 add_filter( 'script_loader_tag', 'forgepress_add_module_to_script', 10, 3 );
 
+// Add body classes based on the sidebar layout.
 function forgepress_body_classes( $classes ) {
-	$site_layout    = get_theme_mod( 'forgepress_site_layout', 'boxed' );
-	$classes[]      = 'layout-' . $site_layout;
+	// The Global Layout logic has been REMOVED.
+
+	// Sidebar Layout Logic.
 	$sidebar_layout = 'layout-no-sidebar';
-	$show_on_blog   = get_theme_mod( 'forgepress_sidebar_show_on_blog', false );
-	$show_on_posts  = get_theme_mod( 'forgepress_sidebar_show_on_posts', false );
-	$chosen_layout  = get_theme_mod( 'forgepress_sidebar_layout', 'no-sidebar' );
-	if ( ( is_home() || is_archive() || is_search() ) && true === $show_on_blog ) {
-		$sidebar_layout = 'layout-' . $chosen_layout;
-	} elseif ( ( is_singular( 'post' ) ) && true === $show_on_posts ) {
-		$sidebar_layout = 'layout-' . $chosen_layout;
+	
+	// Add a foolproof check to ensure sidebars NEVER apply on the custom homepage.
+	if ( ! is_front_page() ) {
+		$show_on_blog   = get_theme_mod( 'forgepress_sidebar_show_on_blog', true );
+		$show_on_posts  = get_theme_mod( 'forgepress_sidebar_show_on_posts', true );
+		$chosen_layout  = get_theme_mod( 'forgepress_sidebar_layout', 'no-sidebar' );
+
+		if ( ( is_home() || is_archive() || is_search() ) && true === $show_on_blog ) {
+			$sidebar_layout = 'layout-' . $chosen_layout;
+		} elseif ( is_singular( 'post' ) && true === $show_on_posts ) {
+			$sidebar_layout = 'layout-' . $chosen_layout;
+		}
 	}
+	
 	$classes[] = $sidebar_layout;
 	return $classes;
 }
 add_filter( 'body_class', 'forgepress_body_classes' );
+// End of body classes function
 
 function forgepress_handle_customizer_reset() {
 	if ( ! isset( $_GET['action'] ) || 'forgepress_reset_customizer' !== $_GET['action'] ) { return; }

@@ -13,6 +13,7 @@ get_header(); ?>
 		<main id="main" class="site-main">
 			<?php
 			if ( class_exists( 'WooCommerce' ) && function_exists( 'woocommerce_content' ) ) {
+				// If WooCommerce is active, display the WooCommerce content.
 				woocommerce_content();
 			} else {
 				echo '<p>WooCommerce is not active. Please activate the WooCommerce plugin.</p>';

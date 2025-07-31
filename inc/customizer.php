@@ -67,16 +67,18 @@ function forgepress_customize_register( $wp_customize ) {
 
 	// --- Layout Section ---
 	$wp_customize->add_section( 'forgepress_layout_section', array( 'title' => __( 'Layout', 'forgepress' ), 'panel' => 'forgepress_theme_options' ) );
-	$wp_customize->add_setting( 'forgepress_site_layout', array( 'default' => 'boxed', 'sanitize_callback' => 'sanitize_key' ) );
-	$wp_customize->add_control( 'forgepress_site_layout_control', array( 'label' => __( 'Global Site Layout', 'forgepress' ), 'section' => 'forgepress_layout_section', 'settings' => 'forgepress_site_layout', 'type' => 'radio', 'choices' => array( 'boxed' => __( 'Boxed', 'forgepress' ), 'full-width' => __( 'Full Width', 'forgepress' ) ) ) );
-	$wp_customize->add_setting( 'forgepress_sidebar_layout', array( 'default' => 'no-sidebar', 'sanitize_callback' => 'sanitize_key' ) );
-	$wp_customize->add_control( 'forgepress_sidebar_layout_control', array( 'label' => __( 'Sidebar Layout', 'forgepress' ), 'section' => 'forgepress_layout_section', 'settings' => 'forgepress_sidebar_layout', 'type' => 'select', 'choices' => array( 'no-sidebar' => __( 'No Sidebar', 'forgepress' ), 'sidebar-right' => __( 'Right Single Sidebar', 'forgepress' ), 'sidebar-left' => __( 'Left Single Sidebar', 'forgepress' ), 'sidebar-both' => __( 'Left and Right Sidebars', 'forgepress' ), 'sidebar-double-right' => __( 'Right Side Double Sidebar', 'forgepress' ) ) ) );
+	
+	// The Global Site Layout control has been REMOVED.
 
-	// --- Sidebar Display Section ---
+	// Sidebar Layout Setting & Control (This remains)
+	$wp_customize->add_setting( 'forgepress_sidebar_layout', array( 'default' => 'no-sidebar', 'sanitize_callback' => 'sanitize_key' ) );
+	$wp_customize->add_control( 'forgepress_sidebar_layout_control', array( 'label' => __( 'Sidebar Layout (for Blog, Posts, etc.)', 'forgepress' ), 'section' => 'forgepress_layout_section', 'settings' => 'forgepress_sidebar_layout', 'type' => 'select', 'choices' => array( 'no-sidebar' => __( 'No Sidebar', 'forgepress' ), 'sidebar-right' => __( 'Right Single Sidebar', 'forgepress' ), 'sidebar-left' => __( 'Left Single Sidebar', 'forgepress' ), 'sidebar-both' => __( 'Left and Right Sidebars', 'forgepress' ), 'sidebar-double-right' => __( 'Right Side Double Sidebar', 'forgepress' ) ) ) );
+
+	// --- Sidebar Display Section (This remains) ---
 	$wp_customize->add_section( 'forgepress_sidebar_display_section', array( 'title' => __( 'Sidebar Display', 'forgepress' ), 'description' => __( 'Choose where to display your chosen sidebar layout.', 'forgepress' ), 'panel' => 'forgepress_theme_options' ) );
-	$wp_customize->add_setting( 'forgepress_sidebar_show_on_blog', array( 'default' => false, 'sanitize_callback' => 'rest_sanitize_boolean' ) );
+	$wp_customize->add_setting( 'forgepress_sidebar_show_on_blog', array( 'default' => true, 'sanitize_callback' => 'rest_sanitize_boolean' ) ); // Default to true
 	$wp_customize->add_control( 'forgepress_sidebar_show_on_blog_control', array( 'label' => __( 'Show on Blog / Archives', 'forgepress' ), 'section' => 'forgepress_sidebar_display_section', 'settings' => 'forgepress_sidebar_show_on_blog', 'type' => 'checkbox' ) );
-	$wp_customize->add_setting( 'forgepress_sidebar_show_on_posts', array( 'default' => false, 'sanitize_callback' => 'rest_sanitize_boolean' ) );
+	$wp_customize->add_setting( 'forgepress_sidebar_show_on_posts', array( 'default' => true, 'sanitize_callback' => 'rest_sanitize_boolean' ) ); // Default to true
 	$wp_customize->add_control( 'forgepress_sidebar_show_on_posts_control', array( 'label' => __( 'Show on Single Posts', 'forgepress' ), 'section' => 'forgepress_sidebar_display_section', 'settings' => 'forgepress_sidebar_show_on_posts', 'type' => 'checkbox' ) );
 
 	// --- Color Sections ---
