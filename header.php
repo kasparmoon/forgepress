@@ -24,8 +24,35 @@
 
 		<div class="site-branding">
 			<?php
-			// THIS IS THE CHANGE: Display the custom logo or the site title.
-			the_custom_logo();
+			$has_logo            = has_custom_logo();
+			$display_header_text = get_theme_mod( 'display_header_text', true );
+
+			// This is the new, corrected logic that handles all four scenarios.
+			if ( $display_header_text ) {
+				// SCENARIO 1 & 3: The "Display Site Title and Tagline" checkbox is CHECKED.
+				// We will always show the site title and tagline, regardless of whether a logo is uploaded.
+				if ( is_front_page() && is_home() ) :
+					?>
+					<h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
+					<?php
+				else :
+					?>
+					<p class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></p>
+					<?php
+				endif;
+				$site_description = get_bloginfo( 'description', 'display' );
+				if ( $site_description || is_customize_preview() ) :
+					?>
+					<p class="site-description"><?php echo $site_description; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></p>
+					<?php
+				endif;
+			} elseif ( $has_logo ) {
+				// SCENARIO 2: The checkbox is UNCHECKED and a logo EXISTS.
+				// We will show only the logo.
+				the_custom_logo();
+			}
+			// SCENARIO 4: The checkbox is UNCHECKED and NO logo exists.
+			// This block is intentionally empty, so nothing will be displayed.
 			?>
 		</div><div class="header-top">
 			<nav id="secondary-navigation" class="secondary-navigation">
